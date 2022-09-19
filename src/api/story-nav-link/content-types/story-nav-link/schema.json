@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "story_nav_links",
+  "info": {
+    "singularName": "story-nav-link",
+    "pluralName": "story-nav-links",
+    "displayName": "Story - Nav Link",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "link": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.nav-link",
+        "shared.button"
+      ]
+    },
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "href": {
+      "type": "string",
+      "regex": "https?:\\/\\/"
+    },
+    "highlightText": {
+      "type": "string"
+    }
+  }
+}
