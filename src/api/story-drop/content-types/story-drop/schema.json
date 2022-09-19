@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "story_drops",
+  "info": {
+    "singularName": "story-drop",
+    "pluralName": "story-drops",
+    "displayName": "Story - Drop",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "slug": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "uid",
+      "required": true
+    },
+    "details": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.image-card"
+    }
+  }
+}

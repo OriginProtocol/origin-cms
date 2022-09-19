@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_shared_cards",
+  "info": {
+    "displayName": "Card",
+    "icon": "external-link-alt",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "linkDisplay": {
+      "type": "string",
+      "required": true
+    },
+    "linkURL": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

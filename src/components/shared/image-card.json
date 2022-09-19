@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_shared_image_cards",
+  "info": {
+    "displayName": "Image Card",
+    "icon": "address-card",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Card": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.card"
+    },
+    "cover": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    }
+  }
+}

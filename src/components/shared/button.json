@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_shared_buttons",
+  "info": {
+    "displayName": "Button",
+    "icon": "arrow-alt-circle-down"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "href": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
