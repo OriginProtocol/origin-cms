@@ -35,10 +35,12 @@
       "type": "integer",
       "required": true
     },
-    "highlightLabel": {
-      "type": "string"
-    },
     "useIconAsLabel": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "isHighlight": {
       "type": "boolean",
       "default": false,
       "required": true
