@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "link": {
+    "links": {
       "type": "dynamiczone",
       "components": [
         "shared.nav-link",
