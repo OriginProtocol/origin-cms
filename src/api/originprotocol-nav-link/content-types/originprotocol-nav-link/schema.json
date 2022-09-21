@@ -46,6 +46,15 @@
       },
       "type": "string",
       "regex": "https?:\\/\\/"
+    },
+    "order": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "integer",
+      "required": true
     }
   }
 }

@@ -29,6 +29,10 @@
     },
     "highlightText": {
       "type": "string"
+    },
+    "order": {
+      "type": "integer",
+      "required": true
     }
   }
 }

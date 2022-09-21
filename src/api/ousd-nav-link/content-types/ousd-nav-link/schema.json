@@ -26,6 +26,10 @@
     "href": {
       "type": "string",
       "regex": "https?:\\/\\/"
+    },
+    "order": {
+      "type": "integer",
+      "required": true
     }
   }
 }
