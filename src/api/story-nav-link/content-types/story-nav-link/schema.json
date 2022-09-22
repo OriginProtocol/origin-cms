@@ -33,6 +33,11 @@
     "order": {
       "type": "integer",
       "required": true
+    },
+    "isButton": {
+      "type": "boolean",
+      "default": false,
+      "required": true
     }
   }
 }
