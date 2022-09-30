@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "page_seos",
+  "info": {
+    "singularName": "page-seo",
+    "pluralName": "page-seos",
+    "displayName": "Page SEO",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "metaTags": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.seo",
+      "required": true
+    },
+    "site": {
+      "type": "enumeration",
+      "enum": [
+        "originprotocol.com",
+        "ousd.com",
+        "story.xyz"
+      ],
+      "required": true,
+      "default": "originprotocol.com"
+    },
+    "page": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    }
+  }
+}
