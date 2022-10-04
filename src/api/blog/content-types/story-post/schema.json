@@ -1,11 +1,11 @@
 {
   "kind": "collectionType",
-  "collectionName": "articles",
+  "collectionName": "story_posts",
   "info": {
-    "singularName": "article",
-    "pluralName": "articles",
-    "displayName": "Article",
-    "description": "Create your blog content"
+    "singularName": "story-post",
+    "pluralName": "story-posts",
+    "displayName": "Blog - Story.xyz",
+    "description": "Story.xyz Posts"
   },
   "options": {
     "draftAndPublish": true
@@ -18,15 +18,16 @@
   "attributes": {
     "title": {
       "type": "string",
+      "required": true,
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       }
     },
-    "description": {
-      "type": "text",
-      "maxLength": 80,
+    "body": {
+      "type": "richtext",
+      "required": true,
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -35,7 +36,14 @@
     },
     "slug": {
       "type": "uid",
-      "targetField": "title"
+      "required": true,
+      "regex": "[a-z0-9][a-z0-9-]*[a-z0-9]",
+      "targetField": "title",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "cover": {
       "type": "media",
@@ -56,13 +64,13 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::author.author",
-      "inversedBy": "articles"
+      "inversedBy": "storyPosts"
     },
     "category": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::category.category",
-      "inversedBy": "articles"
+      "inversedBy": "storyPosts"
     },
     "blocks": {
       "type": "dynamiczone",
