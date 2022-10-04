@@ -4,7 +4,7 @@
  *  article controller
  */
 
-const { createCoreController, createCoreRouter } = require('@strapi/strapi').factories;
+const { createCoreController } = require('@strapi/strapi').factories;
 
 const ALL_SITES = {
   OriginProtocol: 'website',
@@ -80,31 +80,9 @@ function generateBlogRouter(siteID) {
   }
 }
 
-async function getPostSlugs(siteID) {
-  const schemaID = siteIDToPostSchemaID(siteID)
-  const slugs = await strapi.entityService.findMany(schemaID, {
-    filters: {
-      publishedAt: {
-        $notNull: true
-      },
-      // locale: 'en'
-    },
-    // fields: ['slug'],
-    // populate: {
-    //   localizations: {
-    //     fields: ['locale'],
-    //     // locale: true
-    //   }
-    // }
-  })
-
-  return slugs
-}
-
 module.exports = { 
   ALL_SITES,
 
   generateBlogController,
-  generateBlogRouter,
-  getPostSlugs
+  generateBlogRouter
 }
