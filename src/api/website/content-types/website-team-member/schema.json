@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "originprotocol_team_members",
+  "info": {
+    "singularName": "website-team-member",
+    "pluralName": "website-team-members",
+    "displayName": "OriginProtocol - Team Member",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "details": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.person"
+    },
+    "role": {
+      "type": "enumeration",
+      "enum": [
+        "core",
+        "community",
+        "advisor"
+      ],
+      "required": true
+    },
+    "bio": {
+      "type": "text"
+    },
+    "position": {
+      "type": "string"
+    },
+    "linkedinUrl": {
+      "type": "string"
+    },
+    "twitterUrl": {
+      "type": "string"
+    }
+  }
+}

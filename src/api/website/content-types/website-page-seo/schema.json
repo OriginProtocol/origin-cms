@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "page_seos",
+  "info": {
+    "singularName": "website-page-seo",
+    "pluralName": "website-page-seos",
+    "displayName": "OriginProtocol - Page SEO",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "metaTags": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.seo",
+      "required": true
+    },
+    "page": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    }
+  }
+}

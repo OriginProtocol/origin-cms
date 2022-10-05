@@ -1,3 +1,3 @@
-const { ALL_SITES, generateBlogRouter } = require("../../../utils/blog-helpers");
+const { ALL_SITES, generateBlogRouter } = require('../../../utils/blog-helpers');
 
-module.exports = generateBlogRouter(ALL_SITES.Story)
+module.exports = generateBlogRouter(ALL_SITES.Story);

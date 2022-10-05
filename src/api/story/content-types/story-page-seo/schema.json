@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "story_page_seos",
+  "info": {
+    "singularName": "story-page-seo",
+    "pluralName": "story-page-seos",
+    "displayName": "Story - Page SEO",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "metaTags": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.seo",
+      "required": true
+    },
+    "page": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    }
+  }
+}

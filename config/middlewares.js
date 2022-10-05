@@ -1,21 +1,22 @@
 module.exports = [
   'strapi::errors',
+  // prettier-ignore
   {
     name: 'strapi::security',
     config: {
       contentSecurityPolicy: {
         useDefaults: true,
         directives: {
-          'connect-src': ["'self'", 'https:'],
+          'connect-src': ['\'self\'', 'https:'],
           'img-src': [
-            "'self'",
+            '\'self\'',
             'data:',
             'blob:',
             'dl.airtable.com',
             'cmsmediaproduction.s3.amazonaws.com',
           ],
           'media-src': [
-            "'self'",
+            '\'self\'',
             'data:',
             'blob:',
             'dl.airtable.com',

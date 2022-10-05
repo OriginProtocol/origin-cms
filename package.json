@@ -2,35 +2,44 @@
   "dependencies": {
     "@_sh/strapi-plugin-ckeditor": "^1.1.2",
     "@strapi/plugin-graphql": "^4.0.5",
-    "@strapi/plugin-i18n": "4.3.8",
-    "@strapi/plugin-users-permissions": "4.3.8",
-    "@strapi/provider-email-sendgrid": "^4.3.8",
-    "@strapi/provider-upload-aws-s3": "^4.3.8",
-    "@strapi/strapi": "4.3.9",
+    "@strapi/plugin-i18n": "^4.4.1",
+    "@strapi/plugin-users-permissions": "4.3.9",
+    "@strapi/provider-email-sendgrid": "^4.3.9",
+    "@strapi/provider-upload-aws-s3": "^4.3.9",
+    "@strapi/strapi": "^4.4.1",
     "better-sqlite3": "7.4.6",
     "fs-extra": "^10.0.0",
     "lodash.set": "^4.3.2",
     "mime-types": "^2.1.27",
     "pg": "^8.8.0",
-    "pg-connection-string": "^2.5.0"
+    "pg-connection-string": "^2.5.0",
+    "strapi-plugin-menus": "^1.0.2"
   },
   "name": "origin-cms",
   "private": true,
   "version": "0.1.0",
-  "description": "A Strapi application",
+  "description": "OriginProtocol CMS backend",
   "scripts": {
     "develop": "strapi develop",
+    "develop:admin": "strapi develop watch-admin",
+    "clean": "rm -rf .cache && rm -rf build",
     "start": "strapi start",
     "build": "strapi build",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "prettier": "prettier --write \"src/**/*.js\" \"config/**/*.js\"",
+    "prettier:check": "prettier -c \"src/**/*.js\" \"config/**/*.js\"",
+    "lint": "eslint . && npm run prettier:check"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.5.4",
+    "eslint": "^8.24.0",
+    "prettier": "^2.7.1"
+  },
   "author": {
-    "name": "A Strapi developer"
+    "name": "Origin Protocol"
   },
   "strapi": {
-    "uuid": "d4441a0b-d82c-4709-9d37-dded2d4ba2ac",
-    "template": "blog"
+    "uuid": "d4441a0b-d82c-4709-9d37-dded2d4ba2ac"
   },
   "engines": {
     "node": ">=14.19.1 <=16.x.x",
