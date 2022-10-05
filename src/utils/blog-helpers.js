@@ -1,9 +1,5 @@
 'use strict';
 
-/**
- *  article controller
- */
-
 const { createCoreController } = require('@strapi/strapi').factories;
 
 const ALL_SITES = {
@@ -19,27 +15,66 @@ function generateBlogController(siteID) {
   const schemaID = siteIDToPostSchemaID(siteID);
 
   return createCoreController(schemaID, ({ strapi }) => ({
-    async findOne(ctx) {
+
+    async findAll(ctx) {
+      const { query } = ctx;
+
+      query.populate = {
+        ...query.populate,
+        category: {
+          fields: ['name', 'slug', 'description']
+        },
+        author: {
+          // fields: ['name', 'avatar', 'bio']
+        }
+      };
+
+      const { results, pagination } = await strapi.service(schemaID).find(query);
+      // TODO: write custom sanitizer
+      // const sanitizedResults = await this.sanitizeOutput(results, ctx);
+
+      return this.transformResponse(results, { pagination });
+    },
+
+    async findBySlug(ctx) {
       const { slug } = ctx.params;
       const { query } = ctx;
 
-      if (!query.filters) query.filters = {};
-      query.filters.slug = slug;
+      query.filters = {
+        ...query.filters,
+        slug
+      }
+      
+      query.populate = {
+        ...query.populate,
+        category: {
+          fields: ['name', 'slug', 'description']
+        },
+        author: {
+          // fields: ['name', 'avatar', 'bio']
+        }
+      };
 
       const { results } = await strapi.service(schemaID).find(query);
-      const sanitizedEntity = await this.sanitizeOutput(results[0], ctx);
+      // TODO: write custom sanitizer
+      // const sanitizedEntity = await this.sanitizeOutput(results[0], ctx);
 
-      return this.transformResponse(sanitizedEntity);
+      return this.transformResponse(results[0]);
     },
 
     async slugs() {
       const { results } = await strapi.service(schemaID).find({
         fields: ['slug', 'updatedAt', 'locale'],
+        populate: {
+          category: {
+            fields: ['slug']
+          },
+        }
       });
 
       return {
         // Restructure the data to make it lesser size
-        data: results.map((post) => [post.locale, new Date(post.updatedAt).getTime(), post.slug]),
+        data: results.map((post) => [post.locale, new Date(post.updatedAt).getTime(), post.category?.slug, post.slug]),
       };
     },
   }));
@@ -51,20 +86,29 @@ function generateBlogRouter(siteID) {
       {
         // Get all posts
         method: 'GET',
+        config: {
+          auth: false,
+        },
         path: `/blog/${siteID}`,
-        handler: `${siteID}-post.find`,
+        handler: `${siteID}-post.findAll`,
       },
       {
         // Get all post slugs
         method: 'GET',
+        config: {
+          auth: false,
+        },
         path: `/blog/${siteID}/slugs`,
         handler: `${siteID}-post.slugs`,
       },
       {
         // Find a single post by slug
         method: 'GET',
+        config: {
+          auth: false,
+        },
         path: `/blog/${siteID}/:slug`,
-        handler: `${siteID}-post.findOne`,
+        handler: `${siteID}-post.findBySlug`,
       },
     ],
   };

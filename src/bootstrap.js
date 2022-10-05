@@ -183,20 +183,6 @@ async function importGlobal() {
   });
 }
 
-async function importAbout() {
-  const updatedBlocks = await updateBlocks(about.blocks);
-
-  await createEntry({
-    model: 'about',
-    entry: {
-      ...about,
-      blocks: updatedBlocks,
-      // Make sure it's not a draft
-      publishedAt: Date.now(),
-    },
-  });
-}
-
 async function importCategories() {
   for (const category of categories) {
     await createEntry({ model: 'category', entry: category });
@@ -232,7 +218,6 @@ async function importSeedData() {
   await importAuthors();
   await importArticles();
   await importGlobal();
-  await importAbout();
 }
 
 module.exports = async () => {

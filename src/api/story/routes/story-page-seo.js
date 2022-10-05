@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * page-seo router
+ * story-page-seo router
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::page-seo.page-seo');
+module.exports = createCoreRouter('api::story.story-page-seo');

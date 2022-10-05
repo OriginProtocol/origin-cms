@@ -6,4 +6,4 @@
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-module.exports = createCoreController('api::page-seo.page-seo');
+module.exports = createCoreController('api::website.website-page-seo');

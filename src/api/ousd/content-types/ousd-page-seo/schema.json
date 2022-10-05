@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ousd_page_seos",
+  "info": {
+    "singularName": "ousd-page-seo",
+    "pluralName": "ousd-page-seos",
+    "displayName": "OUSD - Page SEO",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "metaTags": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.seo",
+      "required": true
+    },
+    "page": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    }
+  }
+}

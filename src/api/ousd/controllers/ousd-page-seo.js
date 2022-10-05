@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- *  about controller
+ * ousd-page-seo controller
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-module.exports = createCoreController('api::about.about');
+module.exports = createCoreController('api::ousd.ousd-page-seo');

@@ -2,9 +2,9 @@
   "kind": "collectionType",
   "collectionName": "page_seos",
   "info": {
-    "singularName": "page-seo",
-    "pluralName": "page-seos",
-    "displayName": "Page SEO",
+    "singularName": "website-page-seo",
+    "pluralName": "website-page-seos",
+    "displayName": "OriginProtocol - Page SEO",
     "description": ""
   },
   "options": {
@@ -17,16 +17,6 @@
       "repeatable": true,
       "component": "shared.seo",
       "required": true
-    },
-    "site": {
-      "type": "enumeration",
-      "enum": [
-        "originprotocol.com",
-        "ousd.com",
-        "story.xyz"
-      ],
-      "required": true,
-      "default": "originprotocol.com"
     },
     "page": {
       "type": "string",

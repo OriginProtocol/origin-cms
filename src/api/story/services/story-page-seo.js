@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * page-seo service
+ * story-page-seo service
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::page-seo.page-seo');
+module.exports = createCoreService('api::story.story-page-seo');
