@@ -1,23 +1,22 @@
-const favicon = require('./extensions/origin-32x32.png')
-const logo = require('./extensions/origin-logo.png')
+const favicon = require('./extensions/origin-32x32.png');
+const logo = require('./extensions/origin-logo.png');
 
 const config = {
   auth: {
-    logo
+    logo,
   },
   head: {
-    favicon
+    favicon,
   },
   menu: {
-    logo: favicon
+    logo: favicon,
   },
   translations: {
     en: {
       'app.components.LeftMenu.navbrand.title': 'Origin CMS',
       'app.components.LeftMenu.navbrand.workplace': 'Admin Dashboard',
-
-    }
-  }
+    },
+  },
 };
 
 const bootstrap = () => {};

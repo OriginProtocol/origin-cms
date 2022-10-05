@@ -15,18 +15,17 @@ function generateBlogController(siteID) {
   const schemaID = siteIDToPostSchemaID(siteID);
 
   return createCoreController(schemaID, ({ strapi }) => ({
-
     async findAll(ctx) {
       const { query } = ctx;
 
       query.populate = {
         ...query.populate,
         category: {
-          fields: ['name', 'slug', 'description']
+          fields: ['name', 'slug', 'description'],
         },
         author: {
           // fields: ['name', 'avatar', 'bio']
-        }
+        },
       };
 
       const { results, pagination } = await strapi.service(schemaID).find(query);
@@ -42,17 +41,17 @@ function generateBlogController(siteID) {
 
       query.filters = {
         ...query.filters,
-        slug
-      }
-      
+        slug,
+      };
+
       query.populate = {
         ...query.populate,
         category: {
-          fields: ['name', 'slug', 'description']
+          fields: ['name', 'slug', 'description'],
         },
         author: {
           // fields: ['name', 'avatar', 'bio']
-        }
+        },
       };
 
       const { results } = await strapi.service(schemaID).find(query);
@@ -67,14 +66,19 @@ function generateBlogController(siteID) {
         fields: ['slug', 'updatedAt', 'locale'],
         populate: {
           category: {
-            fields: ['slug']
+            fields: ['slug'],
           },
-        }
+        },
       });
 
       return {
         // Restructure the data to make it lesser size
-        data: results.map((post) => [post.locale, new Date(post.updatedAt).getTime(), post.category?.slug, post.slug]),
+        data: results.map((post) => [
+          post.locale,
+          new Date(post.updatedAt).getTime(),
+          post.category?.slug,
+          post.slug,
+        ]),
       };
     },
   }));
