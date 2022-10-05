@@ -11,27 +11,31 @@
     "lodash.set": "^4.3.2",
     "mime-types": "^2.1.27",
     "pg": "^8.8.0",
-    "pg-connection-string": "^2.5.0",
-    "prettier": "^2.7.1"
+    "pg-connection-string": "^2.5.0"
   },
   "name": "origin-cms",
   "private": true,
   "version": "0.1.0",
-  "description": "A Strapi application",
+  "description": "OriginProtocol CMS backend",
   "scripts": {
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi",
-    "prettier": "prettier --write \"src/**/*.js\" \"config/**/*.js\""
+    "prettier": "prettier --write \"src/**/*.js\" \"config/**/*.js\"",
+    "prettier:check": "prettier -c \"src/**/*.js\" \"config/**/*.js\"",
+    "lint": "eslint . && npm run prettier:check"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.5.4",
+    "eslint": "^8.24.0",
+    "prettier": "^2.7.1"
+  },
   "author": {
-    "name": "A Strapi developer"
+    "name": "Origin Protocol"
   },
   "strapi": {
-    "uuid": "d4441a0b-d82c-4709-9d37-dded2d4ba2ac",
-    "template": "blog"
+    "uuid": "d4441a0b-d82c-4709-9d37-dded2d4ba2ac"
   },
   "engines": {
     "node": ">=14.19.1 <=16.x.x",
