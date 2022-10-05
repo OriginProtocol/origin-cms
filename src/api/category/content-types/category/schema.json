@@ -13,15 +13,36 @@
   "pluginOptions": {},
   "attributes": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "slug": {
-      "type": "uid"
+      "type": "uid",
+      "required": true,
+      "regex": "[a-z0-9][a-z0-9-]*[a-z0-9]",
+      "targetField": "name",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
-    "articles": {
+    "ousdPosts": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::article.article",
+      "target": "api::blog.ousd-post",
+      "mappedBy": "category"
+    },
+    "storyPosts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::blog.story-post",
+      "mappedBy": "category"
+    },
+    "websitePosts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::blog.website-post",
       "mappedBy": "category"
     },
     "description": {

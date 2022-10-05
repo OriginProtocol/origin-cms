@@ -28,10 +28,22 @@
       "type": "string",
       "private": true
     },
-    "articles": {
+    "ousdPosts": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::article.article",
+      "target": "api::blog.ousd-post",
+      "mappedBy": "author"
+    },
+    "storyPosts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::blog.story-post",
+      "mappedBy": "author"
+    },
+    "websitePosts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::blog.website-post",
       "mappedBy": "author"
     },
     "bio": {
