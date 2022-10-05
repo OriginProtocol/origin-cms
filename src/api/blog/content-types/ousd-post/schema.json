@@ -63,13 +63,13 @@
     "author": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "api::author.author",
+      "target": "api::blog.author",
       "inversedBy": "ousdPosts"
     },
     "category": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "api::category.category",
+      "target": "api::blog.category",
       "inversedBy": "ousdPosts"
     },
     "blocks": {

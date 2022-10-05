@@ -53,27 +53,18 @@ function generateBlogRouter(siteID) {
         method: 'GET',
         path: `/blog/${siteID}`,
         handler: `${siteID}-post.find`,
-        config: {
-          auth: true,
-        },
       },
       {
         // Get all post slugs
         method: 'GET',
         path: `/blog/${siteID}/slugs`,
         handler: `${siteID}-post.slugs`,
-        config: {
-          auth: true,
-        },
       },
       {
         // Find a single post by slug
         method: 'GET',
         path: `/blog/${siteID}/:slug`,
         handler: `${siteID}-post.findOne`,
-        config: {
-          auth: true,
-        },
       },
     ],
   };
