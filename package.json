@@ -20,6 +20,8 @@
   "description": "OriginProtocol CMS backend",
   "scripts": {
     "develop": "strapi develop",
+    "develop:admin": "strapi develop watch-admin",
+    "clean": "rm -rf .cache && rm -rf build",
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi",
