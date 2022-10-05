@@ -1,5 +1,5 @@
-"use strict";
-const bootstrap = require("./bootstrap");
+'use strict';
+const bootstrap = require('./bootstrap');
 
 module.exports = {
   /**

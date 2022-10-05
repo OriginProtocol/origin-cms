@@ -11,7 +11,8 @@
     "lodash.set": "^4.3.2",
     "mime-types": "^2.1.27",
     "pg": "^8.8.0",
-    "pg-connection-string": "^2.5.0"
+    "pg-connection-string": "^2.5.0",
+    "prettier": "^2.7.1"
   },
   "name": "origin-cms",
   "private": true,
@@ -21,7 +22,8 @@
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "prettier": "prettier --write \"src/**/*.js\" \"config/**/*.js\""
   },
   "devDependencies": {},
   "author": {

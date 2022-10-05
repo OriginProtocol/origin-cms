@@ -9,42 +9,41 @@ const { createCoreController } = require('@strapi/strapi').factories;
 const ALL_SITES = {
   OriginProtocol: 'website',
   OUSD: 'ousd',
-  Story: 'story'
-}
+  Story: 'story',
+};
 
 // Valid site values: website, story, ousd
-const siteIDToPostSchemaID = (siteID) => `api::blog.${siteID}-post`
+const siteIDToPostSchemaID = (siteID) => `api::blog.${siteID}-post`;
 
 function generateBlogController(siteID) {
-  const schemaID = siteIDToPostSchemaID(siteID)
+  const schemaID = siteIDToPostSchemaID(siteID);
 
   return createCoreController(schemaID, ({ strapi }) => ({
-
     async findOne(ctx) {
       const { slug } = ctx.params;
       const { query } = ctx;
-  
-      if (!query.filters) query.filters = {}
-      query.filters.slug = slug
-  
+
+      if (!query.filters) query.filters = {};
+      query.filters.slug = slug;
+
       const { results } = await strapi.service(schemaID).find(query);
       const sanitizedEntity = await this.sanitizeOutput(results[0], ctx);
-  
+
       return this.transformResponse(sanitizedEntity);
     },
 
     async slugs() {
       const { results } = await strapi.service(schemaID).find({
-        fields: ['slug', 'updatedAt', 'locale']
+        fields: ['slug', 'updatedAt', 'locale'],
       });
 
       return {
         // Restructure the data to make it lesser size
-        data: results.map(post => [post.locale, new Date(post.updatedAt).getTime(), post.slug])
-      }
-    }
+        data: results.map((post) => [post.locale, new Date(post.updatedAt).getTime(), post.slug]),
+      };
+    },
   }));
-};
+}
 
 function generateBlogRouter(siteID) {
   return {
@@ -55,8 +54,8 @@ function generateBlogRouter(siteID) {
         path: `/blog/${siteID}`,
         handler: `${siteID}-post.find`,
         config: {
-          auth: false
-        }
+          auth: true,
+        },
       },
       {
         // Get all post slugs
@@ -64,8 +63,8 @@ function generateBlogRouter(siteID) {
         path: `/blog/${siteID}/slugs`,
         handler: `${siteID}-post.slugs`,
         config: {
-          auth: false
-        }
+          auth: true,
+        },
       },
       {
         // Find a single post by slug
@@ -73,16 +72,16 @@ function generateBlogRouter(siteID) {
         path: `/blog/${siteID}/:slug`,
         handler: `${siteID}-post.findOne`,
         config: {
-          auth: false
-        }
+          auth: true,
+        },
       },
-    ]
-  }
+    ],
+  };
 }
 
-module.exports = { 
+module.exports = {
   ALL_SITES,
 
   generateBlogController,
-  generateBlogRouter
-}
+  generateBlogRouter,
+};
