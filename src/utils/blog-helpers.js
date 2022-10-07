@@ -40,6 +40,8 @@ function generateBlogController(siteID) {
 
       query.populate = {
         ...query.populate,
+        // Include cover pic
+        cover: true,
         category: {
           populate: {
             // Category localization
@@ -157,6 +159,7 @@ function sanitizePost(post) {
 
   return {
     ...pick(post, ['title', 'body', 'slug', 'locale', 'publishedAt', 'updatedAt']),
+    cover: sanitizeMedia(post.cover),
     category: sanitzeCategory(post.category),
     author: sanitzeAuthor(post.author),
   };
@@ -177,19 +180,23 @@ function sanitzeAuthor(author) {
 
   return {
     ...pick(author, ['name', 'bio']),
-    avatar: pick(author.avatar, [
-      'url',
-      'previewUrl',
-      'width',
-      'height',
-      'caption',
-      'alternativeText',
-      'formats',
-      'mime',
-      'size',
-      'ext',
-    ]),
+    avatar: sanitizeMedia(author.avatar),
   };
+}
+
+function sanitizeMedia(media) {
+  return pick(media, [
+    'url',
+    'previewUrl',
+    'width',
+    'height',
+    'caption',
+    'alternativeText',
+    'formats',
+    'mime',
+    'size',
+    'ext',
+  ]);
 }
 
 function getLocalizedContent(obj) {
