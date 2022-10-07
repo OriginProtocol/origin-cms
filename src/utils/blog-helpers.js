@@ -1,7 +1,7 @@
 'use strict';
 
 const { createCoreController } = require('@strapi/strapi').factories;
-const { pick } = require('lodash');
+const { pick, omit } = require('lodash');
 
 const ALL_SITES = {
   OriginProtocol: 'website',
@@ -16,8 +16,8 @@ function generateBlogController(siteID) {
   const schemaID = siteIDToPostSchemaID(siteID);
 
   return createCoreController(schemaID, ({ strapi }) => ({
-    async findAll(ctx) {
-      const { locale } = ctx.params;
+    async find(ctx) {
+      const { locale, slug } = ctx.params;
       const { query } = ctx;
 
       query.filters = {
@@ -25,79 +25,48 @@ function generateBlogController(siteID) {
         locale: 'en',
       };
 
-      query.populate = {
-        ...query.populate,
-        category: {
-          fields: ['name', 'slug', 'description'],
-        },
-        author: {
-          populate: ['avatar'],
+      if (slug) {
+        // For single post query
+        query.filters.slug = slug;
+      }
+
+      const localizationFilter = {
+        localizations: {
+          filters: {
+            locale: locale || 'en',
+          },
         },
       };
 
-      const hasLocaleFilter = locale && locale !== 'en';
-
-      if (hasLocaleFilter) {
-        // When using a different locale, include
-        // translated content if it exists
-        query.populate.localizations = {
-          filters: {
-            locale,
-          },
+      query.populate = {
+        ...query.populate,
+        category: {
           populate: {
-            category: {
-              fields: ['name', 'slug', 'description'],
-            },
-            author: {
-              populate: ['avatar'],
-            },
+            // Category localization
+            ...localizationFilter,
           },
-        };
-      }
+        },
+        author: {
+          populate: {
+            // Include post avatar
+            avatar: true,
+            // Author localization
+            ...localizationFilter,
+          },
+        },
+        // Post localization
+        ...localizationFilter,
+      };
 
-      const queryResults = await strapi.service(schemaID).find(query);
+      const { results, pagination } = await strapi.service(schemaID).find(query);
 
-      const { pagination } = queryResults;
-
-      let results = queryResults.results;
-
-      if (hasLocaleFilter) {
-        results = results.map((r) => (r.localizations?.length ? r.localizations[0] : r));
-      }
+      const data = sanitizePost(getLocalizedPost(results));
 
       return {
-        data: sanitizePost(results),
-        meta: { pagination },
+        // Return object for single post queries; array otherwise.
+        data: slug ? data[0] : data,
+        meta: slug ? {} : { pagination },
       };
-    },
-
-    async findBySlug(ctx) {
-      const { slug, locale } = ctx.params;
-      const { query } = ctx;
-
-      query.filters = {
-        ...query.filters,
-        slug,
-        locale: {
-          $in: [locale, 'en'].filter((x) => x),
-        },
-      };
-
-      query.populate = {
-        ...query.populate,
-        category: {
-          fields: ['name', 'slug', 'description'],
-        },
-        author: {
-          populate: ['avatar'],
-        },
-      };
-
-      const { results } = await strapi.service(schemaID).find(query);
-
-      const content = results.find((r) => r.locale === locale) || results[0];
-
-      return this.transformResponse(sanitizePost(content));
     },
 
     async slugs() {
@@ -125,21 +94,15 @@ function generateBlogController(siteID) {
         query.populate = {
           localizations: {
             filters: {
-              locale: locale,
+              locale: locale || 'en',
             },
           },
         };
       }
 
-      const queryResults = await strapi.service('api::blog.category').find(query);
+      const { results } = await strapi.service('api::blog.category').find(query);
 
-      let results = queryResults.results;
-
-      if (hasLocaleFilter) {
-        results = results.map((r) => (r.localizations?.length ? r.localizations[0] : r));
-      }
-
-      return { data: sanitzeCategory(results) };
+      return { data: sanitzeCategory(getLocalizedContent(results)) };
     },
   }));
 }
@@ -172,7 +135,7 @@ function generateBlogRouter(siteID) {
           auth: false,
         },
         path: `/blog/${siteID}/:locale?`,
-        handler: `${siteID}-post.findAll`,
+        handler: `${siteID}-post.find`,
       },
       {
         // Find a single post by slug
@@ -181,7 +144,7 @@ function generateBlogRouter(siteID) {
           auth: false,
         },
         path: `/blog/${siteID}/:locale/:slug`,
-        handler: `${siteID}-post.findBySlug`,
+        handler: `${siteID}-post.find`,
       },
     ],
   };
@@ -201,7 +164,7 @@ function sanitizePost(post) {
 
 function sanitzeCategory(cat) {
   if (Array.isArray(cat)) {
-    return cat.map((c) => sanitizePost(c));
+    return cat.map((c) => sanitzeCategory(c));
   }
 
   return pick(cat, ['name', 'slug', 'description']);
@@ -209,10 +172,53 @@ function sanitzeCategory(cat) {
 
 function sanitzeAuthor(author) {
   if (Array.isArray(author)) {
-    return author.map((a) => sanitizePost(a));
+    return author.map((a) => sanitzeAuthor(a));
   }
 
-  return pick(author, ['name', 'avatar', 'bio']);
+  return {
+    ...pick(author, ['name', 'bio']),
+    avatar: pick(author.avatar, [
+      'url',
+      'previewUrl',
+      'width',
+      'height',
+      'caption',
+      'alternativeText',
+      'formats',
+      'mime',
+      'size',
+      'ext',
+    ]),
+  };
+}
+
+function getLocalizedContent(obj) {
+  if (Array.isArray(obj)) {
+    return obj.map((o) => getLocalizedContent(o));
+  }
+
+  if (obj?.localizations && obj.localizations.length) {
+    return {
+      ...omit(obj, 'localizations'),
+      ...obj.localizations[0],
+    };
+  }
+
+  return omit(obj, 'localizations');
+}
+
+function getLocalizedPost(post) {
+  if (Array.isArray(post)) {
+    return post.map((p) => getLocalizedPost(p));
+  }
+
+  const localizedPost = getLocalizedContent(post);
+
+  return {
+    ...localizedPost,
+    author: getLocalizedContent(post.author),
+    category: getLocalizedContent(post.category),
+  };
 }
 
 module.exports = {
