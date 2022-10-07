@@ -1,11 +1,11 @@
 'use strict';
 
 /**
- * category router.
+ * author router.
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::blog.category', {
+module.exports = createCoreRouter('api::blog.author', {
   only: [],
 });

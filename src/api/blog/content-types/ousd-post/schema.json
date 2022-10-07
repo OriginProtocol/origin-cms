@@ -64,13 +64,23 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::blog.author",
-      "inversedBy": "ousdPosts"
+      "inversedBy": "ousdPosts",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "category": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::blog.category",
-      "inversedBy": "ousdPosts"
+      "inversedBy": "ousdPosts",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "seo": {
       "type": "component",
