@@ -6,4 +6,6 @@
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::ousd.ousd-page-seo');
+module.exports = createCoreRouter('api::ousd.ousd-page-seo', {
+  only: ['find', 'findOne'],
+});

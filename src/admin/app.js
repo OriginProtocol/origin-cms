@@ -1,5 +1,5 @@
-const favicon = require('./extensions/origin-32x32.png');
-const logo = require('./extensions/origin-logo.png');
+import favicon from './extensions/origin-32x32.png';
+import logo from './extensions/origin-logo.png';
 
 const config = {
   auth: {

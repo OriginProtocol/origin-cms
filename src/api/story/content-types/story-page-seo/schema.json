@@ -4,24 +4,37 @@
   "info": {
     "singularName": "story-page-seo",
     "pluralName": "story-page-seos",
-    "displayName": "Story - Page SEO",
+    "displayName": "Story.xyz - Page SEO",
     "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
-    "metaTags": {
-      "type": "component",
-      "repeatable": true,
-      "component": "shared.seo",
-      "required": true
-    },
     "page": {
       "type": "string",
       "unique": true,
       "required": true
+    },
+    "skipSitemap": {
+      "title": "Exclude from Sitemap",
+      "type": "boolean"
+    },
+    "metaTags": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }

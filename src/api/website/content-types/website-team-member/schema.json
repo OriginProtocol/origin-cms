@@ -10,12 +10,21 @@
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "details": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.person"
+      "component": "shared.person",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "role": {
       "type": "enumeration",
@@ -27,10 +36,20 @@
       "required": true
     },
     "bio": {
-      "type": "text"
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "position": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "linkedinUrl": {
       "type": "string"

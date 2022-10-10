@@ -6,4 +6,6 @@
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::website.website-page-seo');
+module.exports = createCoreRouter('api::website.website-page-seo', {
+  only: ['find', 'findOne'],
+});
