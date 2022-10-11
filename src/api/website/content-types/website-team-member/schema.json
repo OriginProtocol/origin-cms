@@ -72,7 +72,7 @@
       "type": "string",
       "required": true
     },
-    "otherLink": {
+    "otherUrl": {
       "pluginOptions": {
         "i18n": {
           "localized": false
