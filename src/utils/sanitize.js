@@ -43,6 +43,8 @@ function getFullUrl(absoluteUrl) {
     return absoluteUrl;
   }
 
+  if (absoluteUrl.startsWith('http')) return absoluteUrl;
+
   const { MY_HEROKU_URL, HOST, PORT } = process.env;
 
   let cmsHost = 'http://localhost:1337';
@@ -91,7 +93,7 @@ function sanitizeTeam(team) {
   }
 
   return {
-    ...pick(team, ['title', 'role', 'bio', 'linkedinUrl', 'twitterUrl', 'locale', 'rank']),
+    ...pick(team, ['title', 'name', 'role', 'bio', 'linkedinUrl', 'twitterUrl', 'otherUrl', 'locale', 'rank']),
     avatar: sanitizeMedia(team.avatar),
   };
 }
