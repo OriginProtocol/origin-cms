@@ -37,4 +37,7 @@ module.exports = ({ env }) => ({
     config: !env('AWS_BUCKET') ? localConfig : awsConfig(env),
   },
   ckeditor: true,
+  seo: {
+    enabled: true,
+  }
 });
