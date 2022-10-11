@@ -54,7 +54,8 @@
       }
     },
     "rank": {
-      "type": "integer"
+      "type": "integer",
+      "required": true
     },
     "linkedinUrl": {
       "type": "string"
