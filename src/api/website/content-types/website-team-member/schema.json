@@ -41,7 +41,8 @@
       "enum": [
         "core",
         "community",
-        "advisor"
+        "advisor",
+        "investor"
       ],
       "required": true
     },

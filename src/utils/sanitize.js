@@ -43,7 +43,9 @@ function getFullUrl(absoluteUrl) {
     return absoluteUrl;
   }
 
-  if (absoluteUrl.startsWith('http')) return absoluteUrl;
+  if (absoluteUrl.startsWith('http')) {
+    return absoluteUrl;
+  }
 
   const { MY_HEROKU_URL, HOST, PORT } = process.env;
 
