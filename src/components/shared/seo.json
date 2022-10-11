@@ -29,7 +29,7 @@
     },
     "metaSocial": {
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "shared.meta-social"
     },
     "keywords": {

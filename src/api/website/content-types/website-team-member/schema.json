@@ -21,7 +21,7 @@
   "attributes": {
     "title": {
       "type": "string",
-      "required": true,
+      "required": false,
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -30,7 +30,6 @@
     },
     "avatar": {
       "type": "media",
-      "label": "Image",
       "multiple": false,
       "required": true,
       "allowedTypes": [
@@ -62,6 +61,24 @@
     },
     "twitterUrl": {
       "type": "string"
+    },
+    "name": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "otherLink": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string",
+      "required": false
     }
   }
 }
