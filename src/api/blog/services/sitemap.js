@@ -4,8 +4,7 @@ const { Readable } = require('stream');
 
 const { ALL_SITES, SITE_HOSTS } = require('../../../utils/_helpers');
 
-const DEBOUNCE_INTERVAL = 10 * 1000; // 5m
-// const DEBOUNCE_INTERVAL = 5 * 60 * 1000 // 5m
+const DEBOUNCE_INTERVAL = 5 * 60 * 1000; // 5m
 
 class SitemapService {
   constructor(strapi) {
@@ -33,7 +32,6 @@ class SitemapService {
     // Subscribe to lifecycle hooks
     this.strapi.db.lifecycles.subscribe({
       models: [
-        // TODO: add locales
         'i18n.locales',
         'api::blog.category',
         `api::blog.${siteID}-post`,
@@ -81,7 +79,7 @@ class SitemapService {
     for (const locale of locales) {
       for (const { page } of pages) {
         links.push({
-          url: `/${locale}/${page}`,
+          url: `/${locale}${page}`,
         });
       }
     }

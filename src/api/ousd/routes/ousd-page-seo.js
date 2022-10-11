@@ -1,11 +1,17 @@
 'use strict';
 
-/**
- * ousd-page-seo router
- */
+const { validateLocaleMiddleware } = require('../../../utils/localization');
 
-const { createCoreRouter } = require('@strapi/strapi').factories;
-
-module.exports = createCoreRouter('api::ousd.ousd-page-seo', {
-  only: ['find', 'findOne'],
-});
+module.exports = {
+  routes: [
+    {
+      // Get a page by locale
+      method: 'GET',
+      path: '/ousd/page/:locale/:path',
+      handler: 'ousd-page-seo.find',
+      config: {
+        middlewares: [validateLocaleMiddleware],
+      },
+    },
+  ],
+};

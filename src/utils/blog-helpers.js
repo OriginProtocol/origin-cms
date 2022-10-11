@@ -134,12 +134,6 @@ function generateBlogRouter(siteID) {
   return {
     routes: [
       {
-        // Get all post slugs
-        method: 'GET',
-        path: `/${siteID}/blog/slugs`,
-        handler: `${siteID}-post.slugs`,
-      },
-      {
         // Get all categories
         method: 'GET',
         path: `/${siteID}/blog/:locale/categories`,

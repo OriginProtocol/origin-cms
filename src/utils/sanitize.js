@@ -1,4 +1,4 @@
-const { pick } = require('lodash');
+const { pick, omit } = require('lodash');
 
 function sanitizePost(post) {
   if (!post) return post;
@@ -96,10 +96,21 @@ function sanitizeTeam(team) {
   };
 }
 
+function sanitizePage(page) {
+  if (!page) return page;
+
+  if (Array.isArray(page)) {
+    return page.map((p) => sanitizePage(p));
+  }
+
+  return omit(page.metaTags, ['id']);
+}
+
 module.exports = {
   sanitizeMedia,
   sanitizePost,
   sanitizeAuthor,
   sanitizeCategory,
   sanitizeTeam,
+  sanitizePage,
 };

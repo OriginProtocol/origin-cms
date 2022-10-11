@@ -1,17 +1,17 @@
 'use strict';
 
-// const { validateLocaleMiddleware } = require('../../../utils/localization');
+const { validateLocaleMiddleware } = require('../../../utils/localization');
 
 module.exports = {
   routes: [
-    // {
-    //   // Get all pages
-    //   method: 'GET',
-    //   path: '/website/page/:locale/:slug',
-    //   handler: 'website-page-seo.findPage',
-    //   config: {
-    //     middlewares: [validateLocaleMiddleware]
-    //   }
-    // },
+    {
+      // Get a page by locale
+      method: 'GET',
+      path: '/website/page/:locale/:path',
+      handler: 'website-page-seo.find',
+      config: {
+        middlewares: [validateLocaleMiddleware],
+      },
+    },
   ],
 };

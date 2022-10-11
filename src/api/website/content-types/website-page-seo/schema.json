@@ -19,7 +19,8 @@
     "page": {
       "type": "string",
       "unique": true,
-      "required": true
+      "required": true,
+      "regex": "^(/).*"
     },
     "skipSitemap": {
       "title": "Exclude from Sitemap",
