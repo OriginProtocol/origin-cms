@@ -1,3 +1,24 @@
+const awsConfig = (env) => ({
+  provider: 'aws-s3',
+  providerOptions: {
+    accessKeyId: env('AWS_ACCESS_KEY_ID'),
+    secretAccessKey: env('AWS_ACCESS_SECRET'),
+    region: env('AWS_REGION'),
+    params: {
+      Bucket: env('AWS_BUCKET'),
+    },
+  },
+  actionOptions: {
+    upload: {},
+    uploadStream: {},
+    delete: {},
+  },
+});
+
+const localConfig = {
+  provider: 'local',
+};
+
 module.exports = ({ env }) => ({
   email: {
     config: {
@@ -13,25 +34,13 @@ module.exports = ({ env }) => ({
     },
   },
   upload: {
-    config: {
-      provider: 'aws-s3',
-      providerOptions: {
-        accessKeyId: env('AWS_ACCESS_KEY_ID'),
-        secretAccessKey: env('AWS_ACCESS_SECRET'),
-        region: env('AWS_REGION'),
-        params: {
-          Bucket: env('AWS_BUCKET'),
-        },
-      },
-      actionOptions: {
-        upload: {},
-        uploadStream: {},
-        delete: {},
-      },
-    },
+    config: !env('AWS_BUCKET') ? localConfig : awsConfig(env),
   },
   ckeditor: true,
   seo: {
     enabled: true,
-  }
+  },
+  'drag-drop-content-types': {
+    enabled: true,
+  },
 });

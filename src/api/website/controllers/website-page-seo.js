@@ -1,9 +1,6 @@
 'use strict';
 
-/**
- * page-seo controller
- */
+const { PageController } = require('../../../utils/page-helpers');
+const { ALL_SITES } = require('../../../utils/_helpers');
 
-const { createCoreController } = require('@strapi/strapi').factories;
-
-module.exports = createCoreController('api::website.website-page-seo');
+module.exports = ({ strapi }) => new PageController(ALL_SITES.OriginProtocol, strapi);

@@ -6,4 +6,6 @@
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::story.story-nav-link');
+module.exports = createCoreRouter('api::story.story-nav-link', {
+  only: ['find', 'findOne'],
+});

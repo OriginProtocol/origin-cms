@@ -1,9 +1,6 @@
 'use strict';
 
-/**
- * story-page-seo controller
- */
+const { PageController } = require('../../../utils/page-helpers');
+const { ALL_SITES } = require('../../../utils/_helpers');
 
-const { createCoreController } = require('@strapi/strapi').factories;
-
-module.exports = createCoreController('api::story.story-page-seo');
+module.exports = ({ strapi }) => new PageController(ALL_SITES.Story, strapi);

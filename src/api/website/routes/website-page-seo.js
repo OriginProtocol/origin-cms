@@ -1,9 +1,17 @@
 'use strict';
 
-/**
- * page-seo router
- */
+const { validateLocaleMiddleware } = require('../../../utils/localization');
 
-const { createCoreRouter } = require('@strapi/strapi').factories;
-
-module.exports = createCoreRouter('api::website.website-page-seo');
+module.exports = {
+  routes: [
+    {
+      // Get a page by locale
+      method: 'GET',
+      path: '/website/page/:locale/:path',
+      handler: 'website-page-seo.find',
+      config: {
+        middlewares: [validateLocaleMiddleware],
+      },
+    },
+  ],
+};

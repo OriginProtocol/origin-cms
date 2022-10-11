@@ -1,118 +1,170 @@
 'use strict';
 
-const { createCoreController } = require('@strapi/strapi').factories;
-
-const ALL_SITES = {
-  OriginProtocol: 'website',
-  OUSD: 'ousd',
-  Story: 'story',
-};
+const { ALL_SITES } = require('./_helpers');
+const { sanitizePost, sanitizeCategory } = require('./sanitize');
+const {
+  getLocalizedPost,
+  getLocalizedContent,
+  validateLocaleMiddleware,
+} = require('./localization');
 
 // Valid site values: website, story, ousd
 const siteIDToPostSchemaID = (siteID) => `api::blog.${siteID}-post`;
 
-function generateBlogController(siteID) {
-  const schemaID = siteIDToPostSchemaID(siteID);
+class BlogController {
+  constructor(siteID, strapi) {
+    this.siteID = siteID;
+    this.schemaID = siteIDToPostSchemaID(siteID);
+    this.strapi = strapi;
+  }
 
-  return createCoreController(schemaID, ({ strapi }) => ({
-    async findAll(ctx) {
-      const { query } = ctx;
+  getPostService() {
+    return this.strapi.service(this.schemaID);
+  }
 
-      query.populate = {
-        ...query.populate,
-        category: {
-          fields: ['name', 'slug', 'description'],
-        },
-        author: {
-          // fields: ['name', 'avatar', 'bio']
-        },
-      };
+  getCategoryService() {
+    return this.strapi.service('api::blog.category');
+  }
 
-      const { results, pagination } = await strapi.service(schemaID).find(query);
-      // TODO: write custom sanitizer
-      // const sanitizedResults = await this.sanitizeOutput(results, ctx);
+  async find(ctx) {
+    const { locale, slug } = ctx.params;
+    const { query } = ctx;
 
-      return this.transformResponse(results, { pagination });
-    },
+    query.filters = {
+      ...query.filters,
+      locale: 'en',
+    };
 
-    async findBySlug(ctx) {
-      const { slug } = ctx.params;
-      const { query } = ctx;
+    if (slug) {
+      // For single post query
+      query.filters.slug = slug;
+    }
 
-      query.filters = {
-        ...query.filters,
-        slug,
-      };
-
-      query.populate = {
-        ...query.populate,
-        category: {
-          fields: ['name', 'slug', 'description'],
-        },
-        author: {
-          // fields: ['name', 'avatar', 'bio']
-        },
-      };
-
-      const { results } = await strapi.service(schemaID).find(query);
-      // TODO: write custom sanitizer
-      // const sanitizedEntity = await this.sanitizeOutput(results[0], ctx);
-
-      return this.transformResponse(results[0]);
-    },
-
-    async slugs() {
-      const { results } = await strapi.service(schemaID).find({
-        fields: ['slug', 'updatedAt', 'locale'],
-        populate: {
-          category: {
-            fields: ['slug'],
+    let localizationFilter = {};
+    if (locale && locale !== 'en') {
+      localizationFilter = {
+        localizations: {
+          filters: {
+            locale,
           },
         },
-      });
-
-      return {
-        // Restructure the data to make it lesser size
-        data: results.map((post) => [
-          post.locale,
-          new Date(post.updatedAt).getTime(),
-          post.category?.slug,
-          post.slug,
-        ]),
       };
-    },
-  }));
+    }
+
+    query.populate = {
+      ...query.populate,
+      // Include cover pic
+      cover: true,
+      category: {
+        populate: {
+          // Category localization
+          ...localizationFilter,
+        },
+      },
+      author: {
+        populate: {
+          // Include post avatar
+          avatar: true,
+          // Author localization
+          ...localizationFilter,
+        },
+      },
+      // Post localization
+      ...localizationFilter,
+    };
+
+    const { results, pagination } = await this.getPostService().find(query);
+
+    const data = sanitizePost(getLocalizedPost(results));
+
+    if (slug && !data?.[0]) {
+      ctx.response.notFound();
+      return;
+    }
+
+    return {
+      // Return object for single post queries; array otherwise.
+      data: slug ? data[0] : data,
+      meta: slug ? {} : { pagination },
+    };
+  }
+
+  async slugs() {
+    const { results } = await this.getPostService().find({
+      fields: ['slug', 'updatedAt'],
+    });
+
+    return {
+      // Restructure the data to make it lesser size
+      data: results.map((post) => [new Date(post.updatedAt).getTime(), post.slug]),
+    };
+  }
+
+  async categories(ctx) {
+    const { locale } = ctx.params;
+    const hasLocaleFilter = locale && locale !== 'en';
+
+    const query = {
+      filters: {
+        locale: 'en',
+      },
+    };
+
+    if (hasLocaleFilter) {
+      query.populate = {
+        localizations: {
+          filters: {
+            locale: locale || 'en',
+          },
+        },
+      };
+    }
+
+    const { results } = await this.getCategoryService().find(query);
+
+    return { data: sanitizeCategory(getLocalizedContent(results)) };
+  }
+}
+
+function generateBlogController(siteID) {
+  return ({ strapi }) => new BlogController(siteID, strapi);
 }
 
 function generateBlogRouter(siteID) {
   return {
     routes: [
       {
-        // Get all posts
+        // Get all categories
         method: 'GET',
+        path: `/${siteID}/blog/:locale/categories`,
+        handler: `${siteID}-post.categories`,
         config: {
-          auth: false,
+          middlewares: [validateLocaleMiddleware],
         },
-        path: `/blog/${siteID}`,
-        handler: `${siteID}-post.findAll`,
-      },
-      {
-        // Get all post slugs
-        method: 'GET',
-        config: {
-          auth: false,
-        },
-        path: `/blog/${siteID}/slugs`,
-        handler: `${siteID}-post.slugs`,
       },
       {
         // Find a single post by slug
         method: 'GET',
+        path: `/${siteID}/blog/:locale/:slug`,
+        handler: `${siteID}-post.find`,
         config: {
-          auth: false,
+          middlewares: [validateLocaleMiddleware],
         },
-        path: `/blog/${siteID}/:slug`,
-        handler: `${siteID}-post.findBySlug`,
+      },
+      {
+        // Get all posts by locale
+        method: 'GET',
+        path: `/${siteID}/blog/:locale`,
+        handler: `${siteID}-post.find`,
+        config: {
+          middlewares: [validateLocaleMiddleware],
+        },
+      },
+      {
+        // Get all posts
+        method: 'GET',
+        path: `/${siteID}/blog`,
+        handler: `${siteID}-post.find`,
       },
     ],
   };

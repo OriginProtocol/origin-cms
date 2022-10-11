@@ -1,9 +1,6 @@
 'use strict';
 
-/**
- * ousd-page-seo controller
- */
+const { PageController } = require('../../../utils/page-helpers');
+const { ALL_SITES } = require('../../../utils/_helpers');
 
-const { createCoreController } = require('@strapi/strapi').factories;
-
-module.exports = createCoreController('api::ousd.ousd-page-seo');
+module.exports = ({ strapi }) => new PageController(ALL_SITES.OUSD, strapi);

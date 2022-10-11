@@ -6,4 +6,6 @@
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::story.story-collection');
+module.exports = createCoreRouter('api::story.story-collection', {
+  only: ['find', 'findOne'],
+});
