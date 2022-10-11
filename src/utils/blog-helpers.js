@@ -1,25 +1,29 @@
 'use strict';
 
-const { ALL_SITES } = require('./_helpers')
-const { sanitizePost, sanitizeCategory } = require('./sanitize')
-const { getLocalizedPost, getLocalizedContent, validateLocaleMiddleware } = require('./localization')
+const { ALL_SITES } = require('./_helpers');
+const { sanitizePost, sanitizeCategory } = require('./sanitize');
+const {
+  getLocalizedPost,
+  getLocalizedContent,
+  validateLocaleMiddleware,
+} = require('./localization');
 
 // Valid site values: website, story, ousd
 const siteIDToPostSchemaID = (siteID) => `api::blog.${siteID}-post`;
 
 class BlogController {
   constructor(siteID, strapi) {
-    this.siteID = siteID
-    this.schemaID = siteIDToPostSchemaID(siteID)
-    this.strapi = strapi
+    this.siteID = siteID;
+    this.schemaID = siteIDToPostSchemaID(siteID);
+    this.strapi = strapi;
   }
 
   getPostService() {
-    return this.strapi.service(this.schemaID)
+    return this.strapi.service(this.schemaID);
   }
 
   getCategoryService() {
-    return this.strapi.service('api::blog.category')
+    return this.strapi.service('api::blog.category');
   }
 
   async find(ctx) {
@@ -36,13 +40,16 @@ class BlogController {
       query.filters.slug = slug;
     }
 
-    const localizationFilter = (!locale || locale === 'en') ? {} : {
-      localizations: {
-        filters: {
-          locale: locale,
+    let localizationFilter = {};
+    if (locale && locale !== 'en') {
+      localizationFilter = {
+        localizations: {
+          filters: {
+            locale,
+          },
         },
-      },
-    };
+      };
+    }
 
     query.populate = {
       ...query.populate,
@@ -71,8 +78,8 @@ class BlogController {
     const data = sanitizePost(getLocalizedPost(results));
 
     if (slug && !data?.[0]) {
-      ctx.response.notFound()
-      return 
+      ctx.response.notFound();
+      return;
     }
 
     return {
@@ -120,7 +127,7 @@ class BlogController {
 }
 
 function generateBlogController(siteID) {
-  return ({ strapi }) => new BlogController(siteID, strapi)
+  return ({ strapi }) => new BlogController(siteID, strapi);
 }
 
 function generateBlogRouter(siteID) {
@@ -129,40 +136,40 @@ function generateBlogRouter(siteID) {
       {
         // Get all post slugs
         method: 'GET',
-        path: `/blog/${siteID}/slugs`,
-        handler: `${siteID}-post.slugs`, 
+        path: `/${siteID}/blog/slugs`,
+        handler: `${siteID}-post.slugs`,
       },
       {
         // Get all categories
         method: 'GET',
-        path: `/blog/${siteID}/:locale/categories`,
+        path: `/${siteID}/blog/:locale/categories`,
         handler: `${siteID}-post.categories`,
         config: {
-          middlewares: [validateLocaleMiddleware]
-        }
+          middlewares: [validateLocaleMiddleware],
+        },
       },
       {
         // Find a single post by slug
         method: 'GET',
-        path: `/blog/${siteID}/:locale/:slug`,
+        path: `/${siteID}/blog/:locale/:slug`,
         handler: `${siteID}-post.find`,
         config: {
-          middlewares: [validateLocaleMiddleware]
-        }
+          middlewares: [validateLocaleMiddleware],
+        },
       },
       {
         // Get all posts by locale
         method: 'GET',
-        path: `/blog/${siteID}/:locale`,
+        path: `/${siteID}/blog/:locale`,
         handler: `${siteID}-post.find`,
         config: {
-          middlewares: [validateLocaleMiddleware]
-        }
+          middlewares: [validateLocaleMiddleware],
+        },
       },
       {
         // Get all posts
         method: 'GET',
-        path: `/blog/${siteID}`,
+        path: `/${siteID}/blog`,
         handler: `${siteID}-post.find`,
       },
     ],

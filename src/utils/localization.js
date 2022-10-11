@@ -3,7 +3,7 @@
 const { omit } = require('lodash');
 
 function getLocalizedContent(obj) {
-  if (!obj) return obj
+  if (!obj) return obj;
 
   if (Array.isArray(obj)) {
     return obj.map((o) => getLocalizedContent(o));
@@ -20,7 +20,7 @@ function getLocalizedContent(obj) {
 }
 
 function getLocalizedPost(post) {
-  if (!post) return post
+  if (!post) return post;
 
   if (Array.isArray(post)) {
     return post.map((p) => getLocalizedPost(p));
@@ -35,21 +35,26 @@ function getLocalizedPost(post) {
   };
 }
 
+function getLocalizedTeam(team) {
+  return getLocalizedContent(team);
+}
+
 function validateLocaleMiddleware(ctx, next) {
   const { locale } = ctx.params;
 
   // Make sure locale is 2 to 5 characters long
   // and has only alphabets with hyphens in between
   if (!/^[a-z]{2}(-[a-z]{2})?$/i.test(locale)) {
-    ctx.response.badRequest('Invalid locale')
-    return
+    ctx.response.badRequest('Invalid locale');
+    return;
   }
-  
-  return next()
+
+  return next();
 }
 
 module.exports = {
   getLocalizedContent,
   getLocalizedPost,
-  validateLocaleMiddleware
+  getLocalizedTeam,
+  validateLocaleMiddleware,
 };

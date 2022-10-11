@@ -1,11 +1,18 @@
 'use strict';
 
-/**
- * website-team-member router
- */
+const { validateLocaleMiddleware } = require('../../../utils/localization');
 
-const { createCoreRouter } = require('@strapi/strapi').factories;
-
-module.exports = createCoreRouter('api::website.website-team-member', {
-  only: ['find', 'findOne'],
-});
+module.exports = {
+  routes: [
+    {
+      // Get all team members
+      method: 'GET',
+      path: '/website/team/:locale',
+      handler: 'website-team-member.get',
+      config: {
+        auth: false,
+        middlewares: [validateLocaleMiddleware],
+      },
+    },
+  ],
+};

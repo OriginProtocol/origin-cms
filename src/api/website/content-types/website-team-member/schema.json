@@ -13,18 +13,29 @@
   "pluginOptions": {
     "i18n": {
       "localized": true
+    },
+    "drag-drop-content-types": {
+      "enabled": true
     }
   },
   "attributes": {
-    "details": {
-      "type": "component",
-      "repeatable": false,
-      "component": "shared.person",
+    "title": {
+      "type": "string",
+      "required": true,
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       }
+    },
+    "avatar": {
+      "type": "media",
+      "label": "Image",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "role": {
       "type": "enumeration",
@@ -43,13 +54,8 @@
         }
       }
     },
-    "position": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+    "rank": {
+      "type": "integer"
     },
     "linkedinUrl": {
       "type": "string"

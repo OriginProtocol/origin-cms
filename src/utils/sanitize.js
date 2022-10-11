@@ -1,7 +1,7 @@
 const { pick } = require('lodash');
 
 function sanitizePost(post) {
-  if (!post) return post
+  if (!post) return post;
 
   if (Array.isArray(post)) {
     return post.map((p) => sanitizePost(p));
@@ -16,7 +16,7 @@ function sanitizePost(post) {
 }
 
 function sanitizeCategory(cat) {
-  if (!cat) return cat
+  if (!cat) return cat;
 
   if (Array.isArray(cat)) {
     return cat.map((c) => sanitizeCategory(c));
@@ -26,7 +26,7 @@ function sanitizeCategory(cat) {
 }
 
 function sanitizeAuthor(author) {
-  if (!author) return author
+  if (!author) return author;
 
   if (Array.isArray(author)) {
     return author.map((a) => sanitizeAuthor(a));
@@ -38,19 +38,62 @@ function sanitizeAuthor(author) {
   };
 }
 
+function getFullUrl(absoluteUrl) {
+  if (!absoluteUrl) {
+    return absoluteUrl;
+  }
+
+  const { MY_HEROKU_URL, HOST, PORT } = process.env;
+
+  let cmsHost = 'http://localhost:1337';
+
+  if (MY_HEROKU_URL) {
+    // Making the assumption that we only use heroku for deployment
+    cmsHost = MY_HEROKU_URL;
+  } else if (HOST && PORT) {
+    // Use env if it's set
+    cmsHost = `http://${HOST}:${PORT}`;
+  }
+
+  if (cmsHost.endsWith('/')) {
+    cmsHost = cmsHost.slice(0, -1);
+  }
+
+  return `${cmsHost}${absoluteUrl}`;
+}
+
 function sanitizeMedia(media) {
-  return pick(media, [
-    'url',
-    'previewUrl',
-    'width',
-    'height',
-    'caption',
-    'alternativeText',
-    'formats',
-    'mime',
-    'size',
-    'ext',
-  ]);
+  if (!media) return media;
+
+  return {
+    ...pick(media, [
+      'url',
+      'previewUrl',
+      'width',
+      'height',
+      'caption',
+      'alternativeText',
+      'formats',
+      'mime',
+      'size',
+      'ext',
+    ]),
+    url: getFullUrl(media.url),
+    previewUrl: getFullUrl(media.previewUrl),
+  };
+}
+
+function sanitizeTeam(team) {
+  if (!team) return team;
+
+  if (Array.isArray(team)) {
+    return team.map((t) => sanitizeTeam(t));
+  }
+
+  return {
+    ...pick(team, ['title', 'role', 'bio', 'linkedinUrl', 'twitterUrl', 'locale', 'rank']),
+    avatar: sanitizeMedia(team.avatar),
+  };
 }
 
 module.exports = {
@@ -58,4 +101,5 @@ module.exports = {
   sanitizePost,
   sanitizeAuthor,
   sanitizeCategory,
-}
+  sanitizeTeam,
+};

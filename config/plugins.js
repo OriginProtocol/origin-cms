@@ -39,5 +39,8 @@ module.exports = ({ env }) => ({
   ckeditor: true,
   seo: {
     enabled: true,
-  }
+  },
+  'drag-drop-content-types': {
+    enabled: true,
+  },
 });
