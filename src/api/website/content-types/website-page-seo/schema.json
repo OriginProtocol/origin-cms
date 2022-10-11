@@ -12,12 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "metaTags": {
-      "type": "component",
-      "repeatable": true,
-      "component": "shared.seo",
-      "required": true
-    },
     "page": {
       "type": "string",
       "unique": true,
