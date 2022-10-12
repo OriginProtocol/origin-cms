@@ -26,7 +26,7 @@
       "title": "Exclude from Sitemap",
       "type": "boolean"
     },
-    "metaTags": {
+    "seo": {
       "type": "component",
       "repeatable": false,
       "component": "shared.seo",
