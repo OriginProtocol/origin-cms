@@ -8,13 +8,10 @@ const {
   validateLocaleMiddleware,
 } = require('./localization');
 
-// Valid site values: website, story, ousd
-const siteIDToPostSchemaID = (siteID) => `api::blog.${siteID}-post`;
-
 class BlogController {
   constructor(siteID, strapi) {
     this.siteID = siteID;
-    this.schemaID = siteIDToPostSchemaID(siteID);
+    this.schemaID = `api::blog.${siteID}-post`;
     this.strapi = strapi;
   }
 
@@ -101,7 +98,7 @@ class BlogController {
   }
 
   async categories(ctx) {
-    const { locale } = ctx.params;
+    const { locale, slug } = ctx.params;
     const hasLocaleFilter = locale && locale !== 'en';
 
     const query = {
@@ -109,6 +106,10 @@ class BlogController {
         locale: 'en',
       },
     };
+
+    if (slug) {
+      query.filters.slug = slug;
+    }
 
     if (hasLocaleFilter) {
       query.populate = {
@@ -122,7 +123,45 @@ class BlogController {
 
     const { results } = await this.getCategoryService().find(query);
 
-    return { data: sanitizeCategory(getLocalizedContent(results)) };
+    return { data: sanitizeCategory(getLocalizedContent(slug ? results[0] : results)) };
+  }
+
+  async resolve(ctx) {
+    const { uuid, locale } = ctx.params;
+
+    // Check if uuid is that of a category
+    const { data: category } = await this.categories({
+      params: {
+        slug: uuid,
+        locale,
+      },
+    });
+
+    if (category) {
+      return {
+        schema: 'category',
+        data: category,
+      };
+    }
+
+    // Check if uuid is that of a post
+    const { data: post } = await this.find({
+      ...ctx,
+      query: {},
+      params: {
+        slug: uuid,
+        locale,
+      },
+    });
+
+    if (post) {
+      return {
+        schema: 'post',
+        data: post,
+      };
+    }
+
+    return ctx.notFound('Not found');
   }
 }
 
@@ -133,6 +172,15 @@ function generateBlogController(siteID) {
 function generateBlogRouter(siteID) {
   return {
     routes: [
+      {
+        // Get route data
+        method: 'GET',
+        path: `/${siteID}/resolve/:locale/:uuid`,
+        handler: `${siteID}-post.resolve`,
+        config: {
+          middlewares: [validateLocaleMiddleware],
+        },
+      },
       {
         // Get all categories
         method: 'GET',

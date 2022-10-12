@@ -95,7 +95,17 @@ function sanitizeTeam(team) {
   }
 
   return {
-    ...pick(team, ['title', 'name', 'role', 'bio', 'linkedinUrl', 'twitterUrl', 'otherUrl', 'locale', 'rank']),
+    ...pick(team, [
+      'title',
+      'name',
+      'role',
+      'bio',
+      'linkedinUrl',
+      'twitterUrl',
+      'otherUrl',
+      'locale',
+      'rank',
+    ]),
     avatar: sanitizeMedia(team.avatar),
   };
 }
