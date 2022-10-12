@@ -58,6 +58,16 @@ class SitemapService {
     return content;
   }
 
+  async getSlugs(siteID) {
+    const { loaded, loadPromise } = this.sitemaps[siteID];
+
+    if (!loaded) {
+      await loadPromise;
+    }
+
+    return this.sitemaps[siteID].postSlugs;
+  }
+
   async regenerate(siteID) {
     const siteHost = SITE_HOSTS[siteID];
     const links = [];
@@ -111,6 +121,7 @@ class SitemapService {
     // Cache it in memory
     this.sitemaps[siteID] = {
       loaded: true,
+      postSlugs: posts.map(p => p.slug),
       content: xmlContent,
     };
 

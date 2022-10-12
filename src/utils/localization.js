@@ -45,7 +45,7 @@ const localeRegex = /^[a-z]{2,4}(-[A-Z][a-z]{3})?(-([A-Z]{2}|[0-9]{3}))?$/
 function validateLocaleMiddleware(ctx, next) {
   const { locale } = ctx.params;
   
-  if (localeRegex.test(locale)) {
+  if (!localeRegex.test(locale)) {
     ctx.response.badRequest('Invalid locale');
     return;
   }
