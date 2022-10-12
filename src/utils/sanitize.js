@@ -107,7 +107,7 @@ function sanitizePage(page) {
     return page.map((p) => sanitizePage(p));
   }
 
-  return omit(page.metaTags, ['id']);
+  return omit(page.seo, ['id']);
 }
 
 module.exports = {
