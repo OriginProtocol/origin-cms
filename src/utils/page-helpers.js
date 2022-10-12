@@ -23,7 +23,12 @@ class PageController {
         locale: 'en',
       },
       populate: {
-        seo: {},
+        seo: {
+          populate: {
+            metaImage: '*',
+            metaSocial: '*'
+          }
+        },
         localizations: {
           filters: {
             locale,
