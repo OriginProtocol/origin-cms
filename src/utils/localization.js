@@ -39,12 +39,13 @@ function getLocalizedTeam(team) {
   return getLocalizedContent(team);
 }
 
+// Ref: https://www.w3.org/International/talks/1002-flarenet/slides.pdf
+const localeRegex = /^[a-z]{2,4}(-[A-Z][a-z]{3})?(-([A-Z]{2}|[0-9]{3}))?$/
+
 function validateLocaleMiddleware(ctx, next) {
   const { locale } = ctx.params;
-
-  // Make sure locale is 2 to 5 characters long
-  // and has only alphabets with hyphens in between
-  if (!/^[a-z]{2}(-[a-z]{2})?$/i.test(locale)) {
+  
+  if (localeRegex.test(locale)) {
     ctx.response.badRequest('Invalid locale');
     return;
   }
