@@ -82,12 +82,16 @@ class SitemapService {
     });
     const locales = localeResults.map((l) => l.code);
 
+    console.log(`LOCALES`, localeResults, locales)
+
     // Get static pages
     const pageSchemaId = `api::${siteID}.${siteID}-page-seo`;
     const pages = await this.strapi.db.query(pageSchemaId).findMany({
       select: ['page'],
       where: { locale: 'en' },
     });
+
+    console.log(`PAGES`, pageSchemaId, pages)
 
     // Append all static pages to the sitemap
     for (const locale of locales) {
@@ -105,6 +109,8 @@ class SitemapService {
       where: { locale: 'en' },
     });
 
+    console.log(`POSTS`, postSchemaId, posts)
+
     // Append all blog posts to the sitemap
     for (const locale of locales) {
       for (const { slug, updatedAt } of posts) {
@@ -114,6 +120,9 @@ class SitemapService {
         });
       }
     }
+
+
+    console.log(`LINKS`, postSchemaId, links)
 
     // Create a sitemap
     const stream = new SitemapStream({
