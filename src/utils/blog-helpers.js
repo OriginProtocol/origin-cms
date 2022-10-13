@@ -183,6 +183,9 @@ function generateBlogRouter(siteID) {
         path: `/${siteID}/resolve/:locale/:uuid`,
         handler: `${siteID}-post.resolve`,
         config: {
+          auth: {
+            scope: ['find'],
+          },
           middlewares: [validateLocaleMiddleware],
         },
       },
@@ -191,6 +194,11 @@ function generateBlogRouter(siteID) {
         method: 'GET',
         path: `/${siteID}/blog/slugs`,
         handler: `${siteID}-post.slugs`,
+        config: {
+          auth: {
+            scope: ['find'],
+          },
+        },
       },
       {
         // Get all categories
@@ -198,6 +206,9 @@ function generateBlogRouter(siteID) {
         path: `/${siteID}/blog/:locale/categories`,
         handler: `${siteID}-post.categories`,
         config: {
+          auth: {
+            scope: ['find'],
+          },
           middlewares: [validateLocaleMiddleware],
         },
       },
@@ -207,6 +218,9 @@ function generateBlogRouter(siteID) {
         path: `/${siteID}/blog/:locale/:slug`,
         handler: `${siteID}-post.find`,
         config: {
+          auth: {
+            scope: ['find'],
+          },
           middlewares: [validateLocaleMiddleware],
         },
       },
@@ -216,6 +230,9 @@ function generateBlogRouter(siteID) {
         path: `/${siteID}/blog/:locale`,
         handler: `${siteID}-post.find`,
         config: {
+          auth: {
+            scope: ['find'],
+          },
           middlewares: [validateLocaleMiddleware],
         },
       },
@@ -224,6 +241,11 @@ function generateBlogRouter(siteID) {
         method: 'GET',
         path: `/${siteID}/blog`,
         handler: `${siteID}-post.find`,
+        config: {
+          auth: {
+            scope: ['find'],
+          },
+        },
       },
     ],
   };

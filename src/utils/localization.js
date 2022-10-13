@@ -40,11 +40,11 @@ function getLocalizedTeam(team) {
 }
 
 // Ref: https://www.w3.org/International/talks/1002-flarenet/slides.pdf
-const localeRegex = /^[a-z]{2,4}(-[A-Z][a-z]{3})?(-([A-Z]{2}|[0-9]{3}))?$/
+const localeRegex = /^[a-z]{2,4}(-[A-Z][a-z]{3})?(-([A-Z]{2}|[0-9]{3}))?$/;
 
 function validateLocaleMiddleware(ctx, next) {
   const { locale } = ctx.params;
-  
+
   if (!localeRegex.test(locale)) {
     ctx.response.badRequest('Invalid locale');
     return;

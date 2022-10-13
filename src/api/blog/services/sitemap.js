@@ -121,7 +121,7 @@ class SitemapService {
     // Cache it in memory
     this.sitemaps[siteID] = {
       loaded: true,
-      postSlugs: posts.map(p => p.slug),
+      postSlugs: posts.map((p) => p.slug),
       content: xmlContent,
     };
 
