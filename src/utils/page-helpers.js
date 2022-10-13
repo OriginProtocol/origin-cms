@@ -26,7 +26,13 @@ class PageController {
         seo: {
           populate: {
             metaImage: '*',
-            metaSocial: '*',
+            metaSocial: {
+              populate: {
+                image: {
+                  url: true
+                }
+              }
+            },
           },
         },
         localizations: {
