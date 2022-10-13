@@ -9,8 +9,7 @@
   "attributes": {
     "title": {
       "type": "string",
-      "required": true,
-      "unique": false
+      "required": true
     },
     "description": {
       "type": "text",
