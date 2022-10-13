@@ -8,13 +8,11 @@ const {
   validateLocaleMiddleware,
 } = require('./localization');
 
-// Valid site values: website, story, ousd
-const siteIDToPostSchemaID = (siteID) => `api::blog.${siteID}-post`;
-
 class BlogController {
   constructor(siteID, strapi) {
     this.siteID = siteID;
-    this.schemaID = siteIDToPostSchemaID(siteID);
+    this.schemaID = `api::blog.${siteID}-post`;
+    this.pageSchemaID = `api::${siteID}.${siteID}-page-seo`;
     this.strapi = strapi;
   }
 
@@ -22,8 +20,16 @@ class BlogController {
     return this.strapi.service(this.schemaID);
   }
 
+  getPageService() {
+    return this.strapi.service(this.pageSchemaID);
+  }
+
   getCategoryService() {
     return this.strapi.service('api::blog.category');
+  }
+
+  getSitemapService() {
+    return this.strapi.service('api::blog.sitemap');
   }
 
   async find(ctx) {
@@ -77,7 +83,7 @@ class BlogController {
 
     const data = sanitizePost(getLocalizedPost(results));
 
-    if (slug && !data?.[0]) {
+    if (slug && !data?.[0] && ctx.response) {
       ctx.response.notFound();
       return;
     }
@@ -90,18 +96,15 @@ class BlogController {
   }
 
   async slugs() {
-    const { results } = await this.getPostService().find({
-      fields: ['slug', 'updatedAt'],
-    });
+    const data = await this.getSitemapService().getSlugs(this.siteID);
 
     return {
-      // Restructure the data to make it lesser size
-      data: results.map((post) => [new Date(post.updatedAt).getTime(), post.slug]),
+      data,
     };
   }
 
   async categories(ctx) {
-    const { locale } = ctx.params;
+    const { locale, slug } = ctx.params;
     const hasLocaleFilter = locale && locale !== 'en';
 
     const query = {
@@ -109,6 +112,10 @@ class BlogController {
         locale: 'en',
       },
     };
+
+    if (slug) {
+      query.filters.slug = slug;
+    }
 
     if (hasLocaleFilter) {
       query.populate = {
@@ -122,7 +129,44 @@ class BlogController {
 
     const { results } = await this.getCategoryService().find(query);
 
-    return { data: sanitizeCategory(getLocalizedContent(results)) };
+    return { data: sanitizeCategory(getLocalizedContent(slug ? results[0] : results)) };
+  }
+
+  async resolve(ctx) {
+    const { uuid, locale } = ctx.params;
+
+    // Check if uuid is that of a category
+    const { data: category } = await this.categories({
+      params: {
+        slug: uuid,
+        locale,
+      },
+    });
+
+    if (category) {
+      return {
+        schema: 'category',
+        data: category,
+      };
+    }
+
+    // Check if uuid is that of a post
+    const { data: post } = await this.find({
+      query: {},
+      params: {
+        slug: uuid,
+        locale,
+      },
+    });
+
+    if (post) {
+      return {
+        schema: 'post',
+        data: post,
+      };
+    }
+
+    return ctx.response.notFound('Not found');
   }
 }
 
@@ -133,6 +177,21 @@ function generateBlogController(siteID) {
 function generateBlogRouter(siteID) {
   return {
     routes: [
+      {
+        // Get route data
+        method: 'GET',
+        path: `/${siteID}/resolve/:locale/:uuid`,
+        handler: `${siteID}-post.resolve`,
+        config: {
+          middlewares: [validateLocaleMiddleware],
+        },
+      },
+      {
+        // Get all post slugs
+        method: 'GET',
+        path: `/${siteID}/blog/slugs`,
+        handler: `${siteID}-post.slugs`,
+      },
       {
         // Get all categories
         method: 'GET',
