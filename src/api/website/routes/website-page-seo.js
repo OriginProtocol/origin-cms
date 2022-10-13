@@ -10,6 +10,9 @@ module.exports = {
       path: '/website/page/:locale/:path',
       handler: 'website-page-seo.find',
       config: {
+        auth: {
+          scope: ['find'],
+        },
         middlewares: [validateLocaleMiddleware],
       },
     },

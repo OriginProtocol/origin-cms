@@ -26,8 +26,8 @@ class PageController {
         seo: {
           populate: {
             metaImage: '*',
-            metaSocial: '*'
-          }
+            metaSocial: '*',
+          },
         },
         localizations: {
           filters: {

@@ -10,6 +10,9 @@ module.exports = {
       path: '/ousd/page/:locale/:path',
       handler: 'ousd-page-seo.find',
       config: {
+        auth: {
+          scope: ['find'],
+        },
         middlewares: [validateLocaleMiddleware],
       },
     },

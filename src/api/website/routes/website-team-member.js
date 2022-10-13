@@ -10,7 +10,9 @@ module.exports = {
       path: '/website/team/:locale',
       handler: 'website-team-member.get',
       config: {
-        auth: false,
+        auth: {
+          scope: ['find'],
+        },
         middlewares: [validateLocaleMiddleware],
       },
     },

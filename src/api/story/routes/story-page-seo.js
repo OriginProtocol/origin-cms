@@ -10,6 +10,9 @@ module.exports = {
       path: '/story/page/:locale/:path',
       handler: 'story-page-seo.find',
       config: {
+        auth: {
+          scope: ['find'],
+        },
         middlewares: [validateLocaleMiddleware],
       },
     },
