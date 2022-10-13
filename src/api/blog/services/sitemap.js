@@ -59,13 +59,13 @@ class SitemapService {
   }
 
   async getSlugs(siteID) {
-    const { loaded, loadPromise } = this.sitemaps[siteID];
+    const { loaded, postSlugs } = this.sitemaps[siteID];
 
     if (!loaded) {
-      await loadPromise;
+      return []
     }
 
-    return this.sitemaps[siteID].postSlugs;
+    return postSlugs || [];
   }
 
   async regenerate(siteID) {
