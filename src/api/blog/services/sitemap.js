@@ -72,6 +72,10 @@ class SitemapService {
     const siteHost = SITE_HOSTS[siteID];
     const links = [];
 
+    links.push({
+      url: '/'
+    })
+
     // Get all locales
     const localeResults = await this.strapi.db.query('plugin::i18n.locale').findMany({
       select: ['code'],
