@@ -1477,11 +1477,6 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@interactjs/types@1.10.17":
-  version "1.10.17"
-  resolved "https://registry.yarnpkg.com/@interactjs/types/-/types-1.10.17.tgz#1649de06d9ead790c81ecece76736b852bdfc77e"
-  integrity sha512-X2JpoM7xUw0p9Me0tMaI0HNfcF/Hd07ZZlzpnpEMpGerUZOLoyeThrV9P+CrBHxZrluWJrigJbcdqXliFd0YMA==
-
 "@internationalized/number@^3.1.1":
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/@internationalized/number/-/number-3.1.1.tgz#160584316741de4381689ab759001603ee17b595"
@@ -1680,13 +1675,6 @@
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.0.1.tgz#88d7ac31811ab0cef14aaaeae2a0474923b278bc"
   integrity sha512-eBV5rvW4dRFOU1eajN7FmYxjAIVz/mRHgUE9En9mBn6m3mulK3WTR5C3iQhL9MZ14rWAq+xOlEaCkDiW0/heOg==
-
-"@retikolo/drag-drop-content-types@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@retikolo/drag-drop-content-types/-/drag-drop-content-types-1.0.5.tgz#814786f1a8d0ebf6fabd133a7aef7f17ce2cb1ba"
-  integrity sha512-JOFvhAIWaVlZ4geVhTgvh9bx+02kow31xwm+dsHzShnmvIaUr/lQ2VTZ6PXCcA6tQ4uJXJew8v2j3i2tXyJi0Q==
-  dependencies:
-    react-drag-sortable "^1.0.6"
 
 "@rushstack/ts-command-line@^4.7.7":
   version "4.12.2"
@@ -6666,13 +6654,6 @@ inquirer@^7.1.0:
     strip-ansi "^6.0.0"
     through "^2.3.6"
 
-interactjs@^1.2.8:
-  version "1.10.17"
-  resolved "https://registry.yarnpkg.com/interactjs/-/interactjs-1.10.17.tgz#aed66a63020cd092236133f9149e6448dc405d72"
-  integrity sha512-grjHJgnWkCoQLmAlk2yalNd1r0ztUhXLJNVjSOfWn1wfNNgU2tx1cDEkro9WYerDNC9UG3MZTeD4O6zOM5gbIA==
-  dependencies:
-    "@interactjs/types" "1.10.17"
-
 internal-slot@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/internal-slot/-/internal-slot-1.0.3.tgz#7347e307deeea2faac2ac6205d4bc7d34967f59c"
@@ -7681,7 +7662,7 @@ lodash.sortby@^4.7.0:
   resolved "https://registry.yarnpkg.com/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
   integrity sha512-HDWXG8isMntAyRF5vZ7xKuEvOhT4AhlRt/3czTSjvGUxjYCBVRQY48ViDHyfYz9VIoBkW4TMGQNapx+l3RUwdA==
 
-lodash@4.17.21, lodash@^4.17.11, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.4:
+lodash@4.17.21, lodash@^4.17.11, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -9260,14 +9241,6 @@ react-dom@^17.0.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     scheduler "^0.20.2"
-
-react-drag-sortable@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/react-drag-sortable/-/react-drag-sortable-1.0.6.tgz#8e979772b2a759b3ed3cb0afcc5cd677457b010c"
-  integrity sha512-EO0pYDMbI9vPT8TXJ3D7fZ58BYQ2F9WPzNkoE+IuKExzZ8Ab0RfoenpZAk55i15XeD/K7+dI7JRPnxvXI7DCIQ==
-  dependencies:
-    interactjs "^1.2.8"
-    lodash "^4.17.4"
 
 react-error-boundary@3.1.1:
   version "3.1.1"
