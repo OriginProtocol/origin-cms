@@ -29,9 +29,9 @@ class PageController {
             metaSocial: {
               populate: {
                 image: {
-                  url: true
-                }
-              }
+                  url: true,
+                },
+              },
             },
           },
         },

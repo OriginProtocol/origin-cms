@@ -13,7 +13,6 @@
 
 module.exports = async () => {
   // const shouldImportSeedData = await isFirstRun();
-
   // if (shouldImportSeedData) {
   //   try {
   //     console.log('Setting up the template...');

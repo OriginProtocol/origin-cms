@@ -49,25 +49,23 @@ class SitemapService {
   }
 
   async get(siteID) {
-    console.log('GET', siteID, this.sitemaps)
-    
-    const { loaded, loadPromise, content } = this.sitemaps[siteID];
+    const { loaded, loadPromise } = this.sitemaps[siteID];
 
     if (!loaded) {
-      return await loadPromise;
+      await loadPromise;
     }
 
-    return content;
+    return this.sitemaps[siteID].content || '';
   }
 
   async getSlugs(siteID) {
-    const { loaded, postSlugs } = this.sitemaps[siteID];
+    const { loaded, loadPromise } = this.sitemaps[siteID];
 
     if (!loaded) {
-      return []
+      await loadPromise;
     }
 
-    return postSlugs || [];
+    return this.sitemaps[siteID].postSlugs || [];
   }
 
   async regenerate(siteID) {
@@ -75,18 +73,14 @@ class SitemapService {
     const links = [];
 
     links.push({
-      url: '/'
-    })
-
-    console.log('REGEN', siteHost, links.length)
+      url: '/',
+    });
 
     // Get all locales
     const localeResults = await this.strapi.db.query('plugin::i18n.locale').findMany({
       select: ['code'],
     });
     const locales = localeResults.map((l) => l.code);
-
-    console.log('REGEN Locale', locales, links.length)
 
     // Get static pages
     const pageSchemaId = `api::${siteID}.${siteID}-page-seo`;
@@ -103,8 +97,6 @@ class SitemapService {
         });
       }
     }
-
-    console.log('REGEN pages', pages, links.length)
 
     // Get blog posts
     const postSchemaId = `api::blog.${siteID}-post`;
@@ -123,16 +115,12 @@ class SitemapService {
       }
     }
 
-    console.log('REGEN posts', posts, links.length)
-
     // Create a sitemap
     const stream = new SitemapStream({
       hostname: siteHost,
     });
     const data = await streamToPromise(Readable.from(links).pipe(stream));
     const xmlContent = data.toString();
-
-    console.log('REGEN stream done')
 
     // Cache it in memory
     this.sitemaps[siteID] = {

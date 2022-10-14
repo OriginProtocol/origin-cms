@@ -7,9 +7,9 @@ const ALL_SITES = {
 };
 
 const SITE_HOSTS = {
-  [ALL_SITES.OriginProtocol]: process.env.WEBSITE_HOST,
-  [ALL_SITES.OUSD]: process.env.OUSD_HOST,
-  [ALL_SITES.Story]: process.env.STORY_HOST,
+  [ALL_SITES.OriginProtocol]: process.env.WEBSITE_HOST || 'https://originprotocol.com',
+  [ALL_SITES.OUSD]: process.env.OUSD_HOST || 'https://ousd.com',
+  [ALL_SITES.Story]: process.env.STORY_HOST || 'https://story.xyz',
 };
 
 module.exports = {
