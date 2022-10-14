@@ -26,7 +26,7 @@
       }
     },
     "slug": {
-      "type": "uid",
+      "type": "string",
       "required": true,
       "regex": "[a-z0-9][a-z0-9-]*[a-z0-9]",
       "targetField": "name",
