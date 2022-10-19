@@ -24,8 +24,7 @@
       "required": true
     },
     "href": {
-      "type": "string",
-      "regex": "https?:\\/\\/"
+      "type": "string"
     },
     "order": {
       "type": "integer",
