@@ -44,8 +44,7 @@
           "localized": true
         }
       },
-      "type": "string",
-      "regex": "https?:\\/\\/"
+      "type": "string"
     },
     "order": {
       "pluginOptions": {
