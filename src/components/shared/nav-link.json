@@ -13,8 +13,7 @@
     },
     "href": {
       "type": "string",
-      "required": true,
-      "regex": "https?:\\/\\/"
+      "required": true
     },
     "icon": {
       "type": "media",
