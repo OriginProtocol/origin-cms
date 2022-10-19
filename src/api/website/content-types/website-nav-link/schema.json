@@ -64,6 +64,22 @@
       "type": "boolean",
       "default": false,
       "required": true
+    },
+    "target": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "enumeration",
+      "enum": [
+        "_self",
+        "_blank",
+        "_parent",
+        "_top"
+      ],
+      "default": "_self",
+      "required": true
     }
   }
 }
