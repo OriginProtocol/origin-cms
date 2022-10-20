@@ -82,6 +82,19 @@
         }
       }
     },
+    "cardCover": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "required": true
+    },
     "seo": {
       "type": "component",
       "repeatable": false,
