@@ -61,6 +61,8 @@ class BlogController {
       ...query.populate,
       // Include cover pic
       cover: true,
+      // Include card cover pic
+      cardCover: true,
       category: {
         populate: {
           // Category localization
