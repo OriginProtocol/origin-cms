@@ -86,7 +86,12 @@ class SitemapService {
     const pageSchemaId = `api::${siteID}.${siteID}-page-seo`;
     const pages = await this.strapi.db.query(pageSchemaId).findMany({
       select: ['page'],
-      where: { locale: 'en' },
+      where: { 
+        locale: 'en',
+        published_at: {
+          $lte: new Date().toISOString()
+        }
+      },
     });
 
     // Append all static pages to the sitemap
@@ -102,7 +107,12 @@ class SitemapService {
     const postSchemaId = `api::blog.${siteID}-post`;
     const posts = await this.strapi.db.query(postSchemaId).findMany({
       select: ['slug', 'updatedAt'],
-      where: { locale: 'en' },
+      where: { 
+        locale: 'en',
+        published_at: {
+          $lte: new Date().toISOString()
+        }
+      },
     });
 
     // Append all blog posts to the sitemap
