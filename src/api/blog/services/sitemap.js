@@ -89,7 +89,7 @@ class SitemapService {
       where: { 
         locale: 'en',
         published_at: {
-          $lte: Date.now()
+          $lte: new Date().toISOString()
         }
       },
     });
@@ -110,7 +110,7 @@ class SitemapService {
       where: { 
         locale: 'en',
         published_at: {
-          $lte: Date.now()
+          $lte: new Date().toISOString()
         }
       },
     });
