@@ -32,6 +32,7 @@ function getLocalizedPost(post) {
     ...localizedPost,
     author: getLocalizedContent(post.author),
     category: getLocalizedContent(post.category),
+    seo: getLocalizedContent(post.seo),
   };
 }
 
