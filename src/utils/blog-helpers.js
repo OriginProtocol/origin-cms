@@ -77,6 +77,14 @@ class BlogController {
           ...localizationFilter,
         },
       },
+      seo: {
+        populate: {
+          // Include post seo metaImage
+          metaImage: true,
+          // Author localizationge
+          ...localizationFilter,
+        }
+      },
       // Post localization
       ...localizationFilter,
     };

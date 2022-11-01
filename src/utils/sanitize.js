@@ -13,6 +13,7 @@ function sanitizePost(post) {
     cardCover: sanitizeMedia(post.cardCover),
     category: sanitizeCategory(post.category),
     author: sanitizeAuthor(post.author),
+    seo: sanitizeSeo(post.seo),
   };
 }
 
@@ -108,6 +109,20 @@ function sanitizeTeam(team) {
       'rank',
     ]),
     avatar: sanitizeMedia(team.avatar),
+  };
+}
+
+function sanitizeSeo(seo) {
+  return {
+    ...pick(seo, [
+      'metaTitle',
+      'metaDescription',
+      'metaRobots',
+      'structuredData',
+      'metaViewport',
+      'canonicalRul',
+    ]),
+    metaImage: sanitizeMedia(seo.metaImage)
   };
 }
 
