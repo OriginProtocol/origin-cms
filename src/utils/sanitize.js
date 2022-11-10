@@ -113,6 +113,8 @@ function sanitizeTeam(team) {
 }
 
 function sanitizeSeo(seo) {
+  if (!seo) return seo;
+
   return {
     ...pick(seo, [
       'metaTitle',
