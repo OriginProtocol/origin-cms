@@ -48,6 +48,11 @@
       ],
       "default": "_self",
       "required": true
+    },
+    "nofollow": {
+      "type": "boolean",
+      "default": false,
+      "required": true
     }
   }
 }
