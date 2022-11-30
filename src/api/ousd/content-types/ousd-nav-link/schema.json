@@ -45,6 +45,11 @@
       ],
       "required": true,
       "default": "_self"
+    },
+    "nofollow": {
+      "type": "boolean",
+      "default": false,
+      "required": true
     }
   }
 }
