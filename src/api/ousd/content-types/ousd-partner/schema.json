@@ -23,7 +23,7 @@
         "images"
       ]
     },
-    "type": {
+    "category": {
       "type": "enumeration",
       "enum": [
         "wallets",
