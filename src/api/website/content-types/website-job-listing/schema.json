@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "originprotocol_job_listings",
+  "info": {
+    "singularName": "website-job-listing",
+    "pluralName": "website-job-listings",
+    "displayName": "OriginProtocol - Job Listing",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    },
+    "drag-drop-content-types": {
+      "enabled": true
+    }
+  },
+  "attributes": {
+    "role": {
+      "type": "string",
+      "required": true
+    },
+    "field": {
+      "type": "enumeration",
+      "enum": [
+        "engineering",
+        "product",
+        "design",
+        "marketing",
+        "operations"
+      ],
+      "required": true
+    },
+    "listingUrl": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
