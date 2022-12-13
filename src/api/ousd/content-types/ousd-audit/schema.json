@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ousd_audits",
+  "info": {
+    "singularName": "ousd-audit",
+    "pluralName": "ousd-audits",
+    "displayName": "OUSD - Audit"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "auditUrl": {
+      "type": "string"
+    }
+  }
+}
