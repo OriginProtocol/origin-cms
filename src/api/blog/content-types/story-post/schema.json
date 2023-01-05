@@ -95,7 +95,7 @@
       },
       "component": "shared.seo"
     },
-    "publishDate": {
+    "publishBackdate": {
       "pluginOptions": {
         "i18n": {
           "localized": false
