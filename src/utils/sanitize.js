@@ -8,7 +8,7 @@ function sanitizePost(post) {
   }
 
   return {
-    ...pick(post, ['title', 'body', 'slug', 'locale', 'publishedAt', 'updatedAt']),
+    ...pick(post, ['title', 'body', 'slug', 'locale', 'publishedAt', 'updatedAt', 'publishBackdate']),
     cover: sanitizeMedia(post.cover),
     cardCover: sanitizeMedia(post.cardCover),
     category: sanitizeCategory(post.category),
