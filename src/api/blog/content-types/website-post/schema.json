@@ -73,17 +73,17 @@
       "inversedBy": "websitePosts"
     },
     "cardCover": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images"
       ],
-      "type": "media",
-      "multiple": false,
       "pluginOptions": {
         "i18n": {
           "localized": false
         }
-      },
-      "required": true
+      }
     },
     "seo": {
       "type": "component",
@@ -94,6 +94,14 @@
         }
       },
       "component": "shared.seo"
+    },
+    "publishDate": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "date"
     }
   }
 }

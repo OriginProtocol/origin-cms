@@ -94,6 +94,14 @@
         }
       },
       "component": "shared.seo"
+    },
+    "publishDate": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "date"
     }
   }
 }
