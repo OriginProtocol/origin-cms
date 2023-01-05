@@ -104,6 +104,14 @@
         }
       },
       "component": "shared.seo"
+    },
+    "publishBackdate": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "date"
     }
   }
 }
