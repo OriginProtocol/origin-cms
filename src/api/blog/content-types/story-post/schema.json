@@ -50,9 +50,7 @@
       "multiple": false,
       "required": false,
       "allowedTypes": [
-        "images",
-        "files",
-        "videos"
+        "images"
       ],
       "pluginOptions": {
         "i18n": {
@@ -94,6 +92,14 @@
         }
       },
       "component": "shared.seo"
+    },
+    "publishBackdate": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "date"
     }
   }
 }
