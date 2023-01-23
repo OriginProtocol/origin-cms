@@ -3,6 +3,7 @@
     "@_sh/strapi-plugin-ckeditor": "^1.1.2",
     "@strapi/plugin-graphql": "^4.0.5",
     "@strapi/plugin-i18n": "^4.4.5",
+    "@strapi/plugin-sentry": "^4.5.6",
     "@strapi/plugin-seo": "^1.7.5",
     "@strapi/plugin-users-permissions": "4.3.9",
     "@strapi/provider-email-sendgrid": "^4.3.9",
