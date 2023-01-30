@@ -71,17 +71,17 @@
       "inversedBy": "storyPosts"
     },
     "cardCover": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images"
       ],
-      "type": "media",
-      "multiple": false,
       "pluginOptions": {
         "i18n": {
           "localized": false
         }
-      },
-      "required": true
+      }
     },
     "seo": {
       "type": "component",
@@ -91,7 +91,8 @@
           "localized": true
         }
       },
-      "component": "shared.seo"
+      "component": "shared.seo",
+      "required": true
     },
     "publishBackdate": {
       "pluginOptions": {
