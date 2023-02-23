@@ -86,11 +86,11 @@ class SitemapService {
     const pageSchemaId = `api::${siteID}.${siteID}-page-seo`;
     const pages = await this.strapi.db.query(pageSchemaId).findMany({
       select: ['page'],
-      where: { 
+      where: {
         locale: 'en',
         published_at: {
-          $lte: new Date().toISOString()
-        }
+          $lte: new Date().toISOString(),
+        },
       },
     });
 
@@ -107,11 +107,11 @@ class SitemapService {
     const postSchemaId = `api::blog.${siteID}-post`;
     const posts = await this.strapi.db.query(postSchemaId).findMany({
       select: ['slug', 'updatedAt'],
-      where: { 
+      where: {
         locale: 'en',
         published_at: {
-          $lte: new Date().toISOString()
-        }
+          $lte: new Date().toISOString(),
+        },
       },
     });
 
