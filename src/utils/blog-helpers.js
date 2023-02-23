@@ -83,7 +83,7 @@ class BlogController {
           metaImage: true,
           // Author localizationge
           ...localizationFilter,
-        }
+        },
       },
       // Post localization
       ...localizationFilter,

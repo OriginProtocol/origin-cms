@@ -8,7 +8,15 @@ function sanitizePost(post) {
   }
 
   return {
-    ...pick(post, ['title', 'body', 'slug', 'locale', 'publishedAt', 'updatedAt', 'publishBackdate']),
+    ...pick(post, [
+      'title',
+      'body',
+      'slug',
+      'locale',
+      'publishedAt',
+      'updatedAt',
+      'publishBackdate',
+    ]),
     cover: sanitizeMedia(post.cover),
     cardCover: sanitizeMedia(post.cardCover),
     category: sanitizeCategory(post.category),
@@ -124,7 +132,7 @@ function sanitizeSeo(seo) {
       'metaViewport',
       'canonicalRul',
     ]),
-    metaImage: sanitizeMedia(seo.metaImage)
+    metaImage: sanitizeMedia(seo.metaImage),
   };
 }
 
