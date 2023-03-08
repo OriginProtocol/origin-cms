@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ousd_litepapers",
+  "info": {
+    "singularName": "ousd-litepaper",
+    "pluralName": "ousd-litepapers",
+    "displayName": "OUSD - Litepaper",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "isSubtitle": {
+      "type": "boolean"
+    },
+    "text": {
+      "type": "richtext"
+    }
+  }
+}
