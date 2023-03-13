@@ -4,7 +4,8 @@
   "info": {
     "singularName": "ousd-faq",
     "pluralName": "ousd-faqs",
-    "displayName": "OUSD - FAQ"
+    "displayName": "OUSD - FAQ",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -16,8 +17,7 @@
       "required": true
     },
     "answer": {
-      "type": "text",
-      "required": true
+      "type": "richtext"
     }
   }
 }
