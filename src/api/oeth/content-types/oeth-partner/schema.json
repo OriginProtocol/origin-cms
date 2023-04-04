@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "oeth_partners",
+  "info": {
+    "singularName": "oeth-partner",
+    "pluralName": "oeth-partners",
+    "displayName": "OET - Partner"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": ["wallets", "media", "exchanges", "dapps", "auditors"]
+    },
+    "description": {
+      "type": "text"
+    },
+    "partnerUrl": {
+      "type": "string"
+    }
+  }
+}
