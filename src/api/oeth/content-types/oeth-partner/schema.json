@@ -4,7 +4,7 @@
   "info": {
     "singularName": "oeth-partner",
     "pluralName": "oeth-partners",
-    "displayName": "OET - Partner"
+    "displayName": "OETH - Partner"
   },
   "options": {
     "draftAndPublish": true
