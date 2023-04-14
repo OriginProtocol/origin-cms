@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "oeth_nav_links",
+  "info": {
+    "singularName": "oeth-nav-link",
+    "pluralName": "oeth-nav-links",
+    "displayName": "OETH - Nav Link",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "links": {
+      "type": "dynamiczone",
+      "components": ["shared.nav-link", "shared.button"]
+    },
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "href": {
+      "type": "string"
+    },
+    "order": {
+      "type": "integer",
+      "required": true
+    },
+    "isButton": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "target": {
+      "type": "enumeration",
+      "enum": ["_self", "_blank", "_parent", "_top"],
+      "required": true,
+      "default": "_self"
+    },
+    "nofollow": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    }
+  }
+}
