@@ -29,9 +29,7 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": [
-        "images"
-      ],
+      "allowedTypes": ["images"],
       "pluginOptions": {
         "i18n": {
           "localized": false
@@ -51,6 +49,12 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::blog.ousd-post",
+      "mappedBy": "author"
+    },
+    "oethPosts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::blog.oeth-post",
       "mappedBy": "author"
     },
     "storyPosts": {

@@ -42,6 +42,12 @@
       "target": "api::blog.ousd-post",
       "mappedBy": "category"
     },
+    "oethPosts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::blog.oeth-post",
+      "mappedBy": "category"
+    },
     "storyPosts": {
       "type": "relation",
       "relation": "oneToMany",
