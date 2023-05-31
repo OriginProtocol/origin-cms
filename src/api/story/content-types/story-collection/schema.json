@@ -30,6 +30,17 @@
         }
       },
       "component": "shared.image-card"
+    },
+    "order": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "integer",
+      "unique": false,
+      "required": true,
+      "default": 1
     }
   }
 }
