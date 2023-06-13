@@ -19,11 +19,20 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "category": {
       "type": "enumeration",
-      "enum": ["wallets", "media", "exchanges", "dapps", "auditors"]
+      "enum": [
+        "wallets",
+        "media",
+        "exchanges",
+        "dapps",
+        "auditors",
+        "analytics"
+      ]
     },
     "description": {
       "type": "text"
