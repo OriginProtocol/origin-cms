@@ -4,7 +4,8 @@
   "info": {
     "singularName": "oeth-partner",
     "pluralName": "oeth-partners",
-    "displayName": "OETH - Partner"
+    "displayName": "OETH - Partner",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -31,7 +32,8 @@
         "exchanges",
         "dapps",
         "auditors",
-        "analytics"
+        "analytics",
+        "farms"
       ]
     },
     "description": {
