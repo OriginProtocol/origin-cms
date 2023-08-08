@@ -22,9 +22,7 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
     "metaSocial": {
       "type": "component",
@@ -38,9 +36,6 @@
     "metaRobots": {
       "type": "string",
       "regex": "[^,]+"
-    },
-    "structuredData": {
-      "type": "json"
     },
     "metaViewport": {
       "type": "string"
