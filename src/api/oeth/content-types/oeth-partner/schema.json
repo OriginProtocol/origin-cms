@@ -24,6 +24,10 @@
         "images"
       ]
     },
+    "rank": {
+      "type": "integer",
+      "required": false
+    },
     "category": {
       "type": "enumeration",
       "enum": [
