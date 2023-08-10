@@ -44,7 +44,7 @@ class BlogController {
 
     if (slug) {
       // For single post query
-      query.filters.slug = slug;
+      query.slug = slug;
     }
 
     let localizationFilter = {};
