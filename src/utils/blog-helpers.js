@@ -94,7 +94,9 @@ class BlogController {
 
     const { results, pagination } = await this.getPostService().find(query);
 
-    const data = sanitizePost(getLocalizedPost(results));
+    const filteredResults = slug ? results.filter((post) => post.slug === slug) : results;
+
+    const data = sanitizePost(getLocalizedPost(filteredResults));
 
     if (slug && !data?.[0] && ctx.response) {
       ctx.response.notFound();
