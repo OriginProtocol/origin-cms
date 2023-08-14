@@ -45,6 +45,10 @@ class BlogController {
       };
     }
 
+    if (locale) {
+      query.locale = locale;
+    }
+
     let localizationFilter = {};
     if (locale && locale !== 'en') {
       localizationFilter = {
