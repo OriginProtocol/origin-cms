@@ -36,15 +36,13 @@ class BlogController {
     const { locale, slug } = ctx.params;
     const { query } = ctx;
 
-    if (locale) {
-      query.locale = {
-        $eq: locale,
-      };
-    }
-
     if (slug) {
       // For single post query
-      query.slug = slug;
+      query.filters = {
+        slug: {
+          $eq: slug,
+        },
+      };
     }
 
     let localizationFilter = {};
