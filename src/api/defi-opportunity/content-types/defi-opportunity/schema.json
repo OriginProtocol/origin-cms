@@ -1,0 +1,70 @@
+{
+  "kind": "collectionType",
+  "collectionName": "defi_opportunities",
+  "info": {
+    "singularName": "defi-opportunity",
+    "pluralName": "defi-opportunities",
+    "displayName": "Defi - Opportunity"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "nameComplement": {
+      "type": "string"
+    },
+    "protocol": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::defi-protocol.defi-protocol"
+    },
+    "chain": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::defi-chain.defi-chain"
+    },
+    "assets": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::defi-asset.defi-asset"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::blog.category"
+    },
+    "llamapoolId": {
+      "type": "string"
+    },
+    "tvl": {
+      "type": "decimal"
+    },
+    "apyBase": {
+      "type": "float"
+    },
+    "apyMax": {
+      "type": "float"
+    },
+    "extraLabel": {
+      "type": "string"
+    },
+    "extraAsset": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::defi-asset.defi-asset"
+    },
+    "guideHref": {
+      "type": "string"
+    },
+    "poolHref": {
+      "type": "string"
+    },
+    "isNew": {
+      "type": "boolean"
+    }
+  }
+}
