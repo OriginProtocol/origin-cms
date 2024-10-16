@@ -1,4 +1,3 @@
-version: '3'
 services:
   origin-cms:
     container_name: origin-cms
