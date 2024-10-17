@@ -4,7 +4,8 @@
   "info": {
     "singularName": "defi-opportunity",
     "pluralName": "defi-opportunities",
-    "displayName": "Defi - Opportunity"
+    "displayName": "Defi - Opportunity",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -32,10 +33,10 @@
       "relation": "oneToMany",
       "target": "api::defi-asset.defi-asset"
     },
-    "category": {
+    "defi_category": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::blog.category"
+      "target": "api::defi-category.defi-category"
     },
     "llamapoolId": {
       "type": "string"
