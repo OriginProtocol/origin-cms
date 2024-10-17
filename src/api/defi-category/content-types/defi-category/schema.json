@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "defi_categories",
+  "info": {
+    "singularName": "defi-category",
+    "pluralName": "defi-categories",
+    "displayName": "Defi - Category"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "tooltip": {
+      "type": "string"
+    }
+  }
+}

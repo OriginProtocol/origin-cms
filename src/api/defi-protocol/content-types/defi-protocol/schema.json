@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "defi_protocols",
+  "info": {
+    "singularName": "defi-protocol",
+    "pluralName": "defi-protocols",
+    "displayName": "Defi - Protocol"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "llamaSlug": {
+      "type": "string"
+    },
+    "icon": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "href": {
+      "type": "string"
+    }
+  }
+}
