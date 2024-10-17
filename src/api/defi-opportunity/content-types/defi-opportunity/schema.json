@@ -33,7 +33,7 @@
       "relation": "oneToMany",
       "target": "api::defi-asset.defi-asset"
     },
-    "defi_category": {
+    "category": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::defi-category.defi-category"
