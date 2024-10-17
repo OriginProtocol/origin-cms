@@ -9,7 +9,6 @@
     "@strapi/provider-email-sendgrid": "^4.12.1",
     "@strapi/provider-upload-aws-s3": "^4.12.1",
     "@strapi/strapi": "^4.12.1",
-    "better-sqlite3": "7.4.6",
     "lodash": "^4.17.21",
     "pg": "^8.8.0",
     "pg-connection-string": "^2.5.0",
@@ -40,10 +39,6 @@
   },
   "strapi": {
     "uuid": "d4441a0b-d82c-4709-9d37-dded2d4ba2ac"
-  },
-  "engines": {
-    "node": ">=16.0.0 <17.0.0",
-    "npm": ">=6.0.0"
   },
   "license": "MIT"
 }

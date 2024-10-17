@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "defi_assets",
+  "info": {
+    "singularName": "defi-asset",
+    "pluralName": "defi-assets",
+    "displayName": "Defi - Asset"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "symbol": {
+      "type": "string"
+    },
+    "icon": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}
