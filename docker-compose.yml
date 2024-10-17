@@ -48,19 +48,6 @@ services:
     networks:
       - origin-cms
 
-  origin-cmsAdminer:
-    container_name: origin-cmsAdminer
-    image: adminer
-    restart: unless-stopped
-    ports:
-      - '9090:8080'
-    environment:
-      - ADMINER_DEFAULT_SERVER=origin-cmsDB
-    networks:
-      - origin-cms
-    depends_on:
-      - origin-cmsDB
-
 volumes:
   origin-cms-data:
 
