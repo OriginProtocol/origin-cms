@@ -13,7 +13,8 @@
   "pluginOptions": {},
   "attributes": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "nameComplement": {
       "type": "string"
@@ -41,9 +42,6 @@
     "llamapoolId": {
       "type": "string"
     },
-    "tvl": {
-      "type": "decimal"
-    },
     "apyBase": {
       "type": "float"
     },
@@ -65,6 +63,9 @@
       "type": "string"
     },
     "isNew": {
+      "type": "boolean"
+    },
+    "isFeatured": {
       "type": "boolean"
     }
   }

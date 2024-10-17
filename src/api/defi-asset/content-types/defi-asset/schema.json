@@ -4,7 +4,8 @@
   "info": {
     "singularName": "defi-asset",
     "pluralName": "defi-assets",
-    "displayName": "Defi - Asset"
+    "displayName": "Defi - Asset",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,17 +13,21 @@
   "pluginOptions": {},
   "attributes": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "unique": true
     },
     "symbol": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     }
   }
 }
