@@ -4,7 +4,8 @@
   "info": {
     "singularName": "defi-protocol",
     "pluralName": "defi-protocols",
-    "displayName": "Defi - Protocol"
+    "displayName": "Defi - Protocol",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -19,14 +20,18 @@
       "type": "string"
     },
     "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "href": {
       "type": "string"
+    },
+    "tvl": {
+      "type": "decimal"
     }
   }
 }

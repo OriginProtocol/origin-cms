@@ -4,7 +4,8 @@
   "info": {
     "singularName": "defi-chain",
     "pluralName": "defi-chains",
-    "displayName": "Defi - Chain"
+    "displayName": "Defi - Chain",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,14 +13,17 @@
   "pluginOptions": {},
   "attributes": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "unique": true
     },
     "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     }
   }
 }

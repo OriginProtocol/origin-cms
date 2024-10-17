@@ -4,7 +4,8 @@
   "info": {
     "singularName": "defi-category",
     "pluralName": "defi-categories",
-    "displayName": "Defi - Category"
+    "displayName": "Defi - Category",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,7 +13,9 @@
   "pluginOptions": {},
   "attributes": {
     "label": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "unique": true
     },
     "tooltip": {
       "type": "string"
