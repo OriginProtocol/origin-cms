@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "defi_strategy_assets",
+  "info": {
+    "singularName": "defi-strategy-asset",
+    "pluralName": "defi-strategy-assets",
+    "displayName": "Defi - Strategy Asset",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "address": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "symbol": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "color": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "chainId": {
+      "type": "integer",
+      "required": true
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+}
