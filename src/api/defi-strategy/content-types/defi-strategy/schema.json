@@ -22,14 +22,10 @@
     "color": {
       "type": "string"
     },
-    "defi_strategy_assets": {
+    "assets": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::defi-strategy-asset.defi-strategy-asset"
-    },
-    "address": {
-      "type": "string",
-      "required": true
     },
     "icon": {
       "type": "media",
@@ -41,6 +37,11 @@
     },
     "chainId": {
       "type": "integer"
+    },
+    "addresses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::defi-strategy-asset.defi-strategy-asset"
     }
   }
 }
