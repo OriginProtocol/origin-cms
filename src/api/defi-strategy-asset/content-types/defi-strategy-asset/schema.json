@@ -17,24 +17,6 @@
       "required": true,
       "unique": true
     },
-    "symbol": {
-      "type": "string",
-      "required": false
-    },
-    "description": {
-      "type": "text"
-    },
-    "color": {
-      "type": "string"
-    },
-    "icon": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ]
-    },
     "chainId": {
       "type": "integer",
       "required": true

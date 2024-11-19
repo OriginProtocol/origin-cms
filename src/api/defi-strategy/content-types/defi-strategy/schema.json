@@ -25,7 +25,7 @@
     "assets": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::defi-strategy-asset.defi-strategy-asset"
+      "target": "api::defi-asset.defi-asset"
     },
     "icon": {
       "type": "media",

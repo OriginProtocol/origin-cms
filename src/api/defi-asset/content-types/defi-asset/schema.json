@@ -28,6 +28,18 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "color": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "chainId": {
+      "type": "integer"
+    },
+    "description": {
+      "type": "text"
     }
   }
 }
